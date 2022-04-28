@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">My Application9</string>
+    <string-array name="colateral_array">
+        <item> </item>
+        <item>Liquefaction</item>
+        <item>Landslide</item>
+        <item>Rockfall</item>
+        <item>Fire</item>
+    </string-array>
+    <string-array name="zone_array">
+        <item> </item>
+        <item>Zone - II</item>
+        <item>Zone - III</item>
+        <item>Zone - IV</item>
+        <item>Zone - V</item>
+    </string-array>
+    <string-array name="ground_array">
+        <item> </item>
+        <item>Hard Rock</item>
+        <item>Medium Soil</item>
+        <item>Soft Soil</item>
+    </string-array>
+    <string-array name="importance_array">
+        <item> </item>
+        <item>Residence</item>
+        <item>Office</item>
+        <item>Commercial</item>
+    </string-array>
+    <string-array name="life_array">
+        <item> </item>
+        <item>Site</item>
+        <item>Form</item>
+        <item>Strength</item>
+    </string-array>
+    <string-array name="loss_factors">
+        <item> </item>
+        <item>Siting Issues</item>
+        <item>Soil and Foundation Conditions</item>
+        <item>Architecture Features</item>
+        <item>Structural Aspects</item>
+        <item>Construction Details</item>
+    </string-array>
+</resources>
