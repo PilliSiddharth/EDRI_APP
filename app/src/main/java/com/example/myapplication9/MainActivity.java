@@ -47,8 +47,6 @@ public class MainActivity extends AppCompatActivity {
     private EditText spectre_text, fsi_text;
     private Spinner spinner, zone_spinner, ground_spinner,  importance_spinner, site_spinner,loss_spinner;
     private CheckBox ch1,ch2,ch3,ch4,ch5,ch6,ch7,ch8,ch9,ch10,ch11,ch12,ch13,ch14,ch15,ch16;
-//    private String ch1_val,ch2_val,ch3_val,ch4_val,ch5_val,ch6_val,ch7_val,ch8_val,ch9_val,ch10_val,ch11_val,ch12_val,ch13_val, ch14_val, ch15_val, ch16_val;
-
 
     TextView coltextView;
     boolean[] selectedCol;
@@ -56,23 +54,27 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> col_data = new ArrayList<>();
     String[] col_array = {"Liquefaction","Rockfall","Fire","Landslide"};
 
+
     TextView zonetextView;
     boolean[] selectedzone;
     ArrayList<Integer> zone_list = new ArrayList<>();
     ArrayList<String> zone_data = new ArrayList<>();
     String[] zone_array = {"Zone-II","Zone-III","Zone-IV","Zone-V"};
+    int z_ans = 0;
 
     TextView soiltextView;
     boolean[] selectedsoil;
     ArrayList<Integer> soil_list = new ArrayList<>();
     ArrayList<String> soil_data = new ArrayList<>();
     String[] soil_array = {"Hard Rock", "Medium Soil", "Soft Soil"};
+    int s_ans = 0;
 
     TextView imptextView;
     boolean[] selectedimp;
     ArrayList<Integer> imp_list = new ArrayList<>();
     ArrayList<String> imp_data = new ArrayList<>();
     String[] imp_array = {"Residence", "Office", "Commercial"};
+    int i_ans = 0;
 
 
     @Override
@@ -157,17 +159,10 @@ public class MainActivity extends AppCompatActivity {
                 builder.setTitle("Select Zone Factor");
                 builder.setCancelable(false);
 
-                builder.setMultiChoiceItems(zone_array, selectedzone, new DialogInterface.OnMultiChoiceClickListener() {
+                builder.setSingleChoiceItems(zone_array, -1, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int i, boolean b) {
-                        if (b) {
-                            zone_list.add(i);
-                            Collections.sort(zone_list);
-                        } else {
-                            zone_list.remove(Integer.valueOf(i));
-                        }
-//                        ArrayList<Integer> col_list2 = col_list;
-//                            System.out.println(col_array[col_list]);
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        z_ans = i;
                     }
 
                 });
@@ -175,17 +170,7 @@ public class MainActivity extends AppCompatActivity {
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        StringBuilder stringBuilder = new StringBuilder();
-                        for (int r = 0; r < zone_list.size(); r++) {
-                            zone_data.add(zone_array[zone_list.get(r)]);
-                        }
-                        for (int j = 0; j < zone_list.size(); j++) {
-                            stringBuilder.append(zone_array[zone_list.get(j)]);
-                            if (j != zone_list.size() - 1) {
-                                stringBuilder.append(", ");
-                            }
-                        }
-                        zonetextView.setText(stringBuilder.toString());
+                        zonetextView.setText(zone_array[z_ans]);
                     }
                 });
 
@@ -222,17 +207,9 @@ public class MainActivity extends AppCompatActivity {
                 builder.setTitle("Select Soil Type");
                 builder.setCancelable(false);
 
-                builder.setMultiChoiceItems(soil_array, selectedsoil, new DialogInterface.OnMultiChoiceClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i, boolean b) {
-                        if (b) {
-                            soil_list.add(i);
-                            Collections.sort(soil_list);
-                        } else {
-                            soil_list.remove(Integer.valueOf(i));
-                        }
-//                        ArrayList<Integer> col_list2 = col_list;
-//                            System.out.println(col_array[col_list]);
+                builder.setSingleChoiceItems(soil_array, -1, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        s_ans = i;
                     }
 
                 });
@@ -240,17 +217,7 @@ public class MainActivity extends AppCompatActivity {
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        StringBuilder stringBuilder = new StringBuilder();
-                        for (int r = 0; r < soil_list.size(); r++) {
-                            soil_data.add(soil_array[soil_list.get(r)]);
-                        }
-                        for (int j = 0; j < soil_list.size(); j++) {
-                            stringBuilder.append(soil_array[soil_list.get(j)]);
-                            if (j != soil_list.size() - 1) {
-                                stringBuilder.append(", ");
-                            }
-                        }
-                        soiltextView.setText(stringBuilder.toString());
+                        soiltextView.setText(soil_array[s_ans]);
                     }
                 });
 
@@ -287,17 +254,10 @@ public class MainActivity extends AppCompatActivity {
                 builder.setTitle("Select Importance Type");
                 builder.setCancelable(false);
 
-                builder.setMultiChoiceItems(imp_array, selectedimp, new DialogInterface.OnMultiChoiceClickListener() {
+                builder.setSingleChoiceItems(imp_array, -1, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int i, boolean b) {
-                        if (b) {
-                            imp_list.add(i);
-                            Collections.sort(imp_list);
-                        } else {
-                            imp_list.remove(Integer.valueOf(i));
-                        }
-//                        ArrayList<Integer> col_list2 = col_list;
-//                            System.out.println(col_array[col_list]);
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        i_ans = i;
                     }
 
                 });
@@ -305,17 +265,8 @@ public class MainActivity extends AppCompatActivity {
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        StringBuilder stringBuilder = new StringBuilder();
-                        for (int r = 0; r < imp_list.size(); r++) {
-                            imp_data.add(imp_array[imp_list.get(r)]);
-                        }
-                        for (int j = 0; j < imp_list.size(); j++) {
-                            stringBuilder.append(imp_array[imp_list.get(j)]);
-                            if (j != imp_list.size() - 1) {
-                                stringBuilder.append(", ");
-                            }
-                        }
-                        imptextView.setText(stringBuilder.toString());
+                        imptextView.setText(imp_array[i_ans]);
+
                     }
                 });
 
@@ -339,7 +290,6 @@ public class MainActivity extends AppCompatActivity {
 //                System.out.println(stringb);
             }
         });
-//        System.out.println(col_array);
 
         ch1 = (CheckBox)findViewById(R.id.site1);
         ch2 = (CheckBox)findViewById(R.id.site2);
