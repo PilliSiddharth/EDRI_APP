@@ -14,7 +14,7 @@ public class AppClient {
         OkHttpClient  okHttpClient = new OkHttpClient.Builder().addInterceptor(httpLoggingInterceptor).build();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://erdi-free.free.beeceptor.com")
+                .baseUrl("https://edri-api.herokuapp.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpClient)
                 .build();

@@ -6,321 +6,1054 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="40dp"
+        android:gravity="start"
         tools:context=".MainActivity">
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="159dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="126dp"
-            android:text="ERDI"
-            android:textColor="#000000"
-            android:textSize="40sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Spinner
-            android:id="@+id/spinner3"
-            android:layout_width="254dp"
-            android:layout_height="41dp"
-            android:layout_marginStart="56dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="61dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
-        <TextView
-            android:id="@+id/textView18"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="58dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="208dp"
-            android:text="Spectre Shape"
-            android:textAlignment="textEnd"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner3" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="136dp"
-            android:layout_height="21dp"
-            android:layout_marginStart="56dp"
-            android:layout_marginTop="108dp"
-            android:layout_marginEnd="179dp"
-            android:gravity="right"
-            android:text="Collateral Damage"
-            android:textAlignment="gravity"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-        <Spinner
-            android:id="@+id/spinner5"
-            android:layout_width="254dp"
-            android:layout_height="41dp"
-            android:layout_marginStart="56dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="61dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="118dp"
-            android:layout_height="25dp"
-            android:layout_marginStart="56dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="196dp"
-            android:text="Ground Shaking"
-            android:textAlignment="textEnd"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner2" />
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="56dp"
-            android:layout_marginTop="128dp"
-            android:layout_marginEnd="238dp"
+            android:layout_marginTop="20dp"
             android:text="Hazard"
             android:textColor="#000000"
             android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textStyle="bold"/>
 
-        <EditText
-            android:id="@+id/editTextTextPersonName4"
-            android:layout_width="252dp"
-            android:layout_height="46dp"
-            android:layout_marginStart="56dp"
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="136dp"
+            android:layout_height="21dp"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="63dp"
-            android:ems="10"
-            android:hint="Enter the Height..."
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView18" />
+            android:gravity="right"
+            android:text="Collateral Damage"
+            android:textAlignment="gravity"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/ColtextView"
+            android:layout_width="match_parent"
+            android:layout_marginTop="12dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@android:drawable/editbox_background_normal"
+            android:drawableRight="@android:drawable/arrow_down_float"
+            android:drawablePadding="16dp"
+            android:hint="Select Collateral Damage"
+            android:padding="12dp" />
+
+<!--        <com.androidbuts.multispinnerfilter.MultiSpinnerSearch-->
+<!--            android:id="@+id/colSpin"-->
+<!--            android:layout_width="254dp"-->
+<!--            android:layout_height="41dp"-->
+<!--            android:layout_marginTop="15dp"-->
+<!--            app:hintText="Select Collateral Damage" />-->
+
+<!--        <com.zeeshan.material.multiselectionspinner.MultiSelectionSpinner-->
+<!--            android:id="@+id/multi_Selection"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:clickable="true"-->
+<!--            android:focusableInTouchMode="false"-->
+<!--            android:importantForAutofill="no"-->
+<!--            android:maxLines="1"-->
+<!--            app:showSearch="true"-->
+<!--            app:sort="true"-->
+<!--            android:focusable="true" />-->
+<!--        <com.sayantan.advancedspinner.MultiSpinner-->
+<!--            android:id="@+id/multi_one"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:entries="@array/items"-->
+<!--            app:title="Spinner Title" />-->
+
+<!--        <com.anurag.multiselectionspinner.MultiSpinner-->
+<!--            android:id="@+id/colSpinner"-->
+<!--            android:layout_width="254dp"-->
+<!--            android:layout_height="41dp"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:layout_marginEnd="61dp"/>-->
+
+<!--        <Spinner-->
+<!--            android:id="@+id/spinner5"-->
+<!--            android:layout_width="254dp"-->
+<!--            android:layout_height="41dp"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:layout_marginEnd="61dp"/>-->
+
+        <TextView
+            android:id="@+id/textView21"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="Ground Shaking"
+            android:textColor="#000000"
+            android:textSize="24sp"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="56dp"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="229dp"
             android:text="Zone Factor"
             android:textAlignment="textEnd"
             android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner5" />
-
-        <Spinner
-            android:id="@+id/spinner2"
-            android:layout_width="254dp"
-            android:layout_height="41dp"
-            android:layout_marginStart="56dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="61dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-        <Spinner
-            android:id="@+id/spinner4"
-            android:layout_width="254dp"
-            android:layout_height="41dp"
-            android:layout_marginStart="56dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="61dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+            android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/textView10"
+            android:id="@+id/ZonetextView"
+            android:layout_width="match_parent"
+            android:layout_marginTop="12dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@android:drawable/editbox_background_normal"
+            android:drawableRight="@android:drawable/arrow_down_float"
+            android:drawablePadding="16dp"
+            android:hint="Select Zone Factor"
+            android:padding="12dp" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="118dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="24dp"
+            android:text="Soil Type"
+            android:textAlignment="inherit"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/SoiltextView"
+            android:layout_width="match_parent"
+            android:layout_marginTop="12dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@android:drawable/editbox_background_normal"
+            android:drawableRight="@android:drawable/arrow_down_float"
+            android:drawablePadding="16dp"
+            android:hint="Select Soil Type"
+            android:padding="12dp" />
+
+        <TextView
+            android:id="@+id/textView18"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="56dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="148dp"
-            android:text="FSI (Floor Space Index)"
+            android:layout_marginTop="20dp"
+            android:text="Spectral Shape"
             android:textAlignment="textEnd"
             android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner4" />
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/editTextTextPersonName4"
+            android:layout_width="252dp"
+            android:layout_height="46dp"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:hint="Enter the Height..."
+            android:inputType="textPersonName"/>
 
         <TextView
             android:id="@+id/textView7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="56dp"
-            android:layout_marginTop="72dp"
-            android:layout_marginEnd="215dp"
+            android:layout_marginTop="40dp"
             android:text="Exposure"
             android:textColor="#000000"
             android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName4" />
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="56dp"
             android:layout_marginTop="32dp"
-            android:layout_marginEnd="224dp"
             android:text="Importance I"
             android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView7" />
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/ImptextView"
+            android:layout_width="match_parent"
+            android:layout_marginTop="12dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@android:drawable/editbox_background_normal"
+            android:drawableRight="@android:drawable/arrow_down_float"
+            android:drawablePadding="16dp"
+            android:hint="Select Importance Type"
+            android:padding="12dp" />
+
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="FSI (Floor Space Index)"
+            android:textAlignment="textEnd"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
 
         <EditText
             android:id="@+id/editTextTextPersonName2"
             android:layout_width="255dp"
             android:layout_height="47dp"
-            android:layout_marginStart="56dp"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="60dp"
             android:ems="10"
             android:hint="Enter the FSI..."
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView10" />
-
-        <Spinner
-            android:id="@+id/spinner7"
-            android:layout_width="254dp"
-            android:layout_height="41dp"
-            android:layout_marginStart="56dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="61dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView13" />
-
-        <Spinner
-            android:id="@+id/spinner6"
-            android:layout_width="254dp"
-            android:layout_height="41dp"
-            android:layout_marginStart="56dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="61dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView12" />
-
-        <TextView
-            android:id="@+id/textView13"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="56dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="89dp"
-            android:text="Economic Loss Inducing Factors"
-            android:textAlignment="textEnd"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner6" />
-
-        <TextView
-            android:id="@+id/textView12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="56dp"
-            android:layout_marginTop="48dp"
-            android:layout_marginEnd="139dp"
-            android:text="Life Threatening Factors"
-            android:textAlignment="textEnd"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView11" />
-
-        <Button
-            android:id="@+id/postdataBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="147dp"
-            android:layout_marginTop="108dp"
-            android:layout_marginEnd="133dp"
-            android:text="SUBMIT"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner7" />
+            android:inputType="textPersonName"/>
 
         <TextView
             android:id="@+id/textView11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="127dp"
-            android:layout_marginTop="80dp"
-            android:layout_marginEnd="108dp"
+            android:layout_marginTop="40dp"
             android:text="Vulnerability"
             android:textColor="#000000"
             android:textSize="24sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:textColor="#000000"
+            android:text="Loss Inducing Factors"
+            android:textAlignment="textEnd"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textViewLossSite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="Siting Issues"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+        <CheckBox
+            android:id="@+id/lossSite1"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="The building is built on sloped ground with access at two or more levels, i.e., at ground, intermediate floor and roof"
+            />
+
+        <TextView
+            android:id="@+id/textViewLossSoil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Soil and Foundation"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+        <CheckBox
+            android:id="@+id/lossSoil1"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Soft Soil"
+            />
+
+        <CheckBox
+            android:id="@+id/lossSoil2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Weak Soil"
+            />
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:textColor="#000000"
+            android:text="Condition (-5%)"
+            android:textAlignment="textEnd"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textViewSusSoil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Suitability of Soil Type"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+        <CheckBox
+            android:id="@+id/suit_soil1"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="High water table (-1)"
+            />
+
+        <CheckBox
+            android:id="@+id/suit_soil2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Soil with moisture (-2)"
+            />
+
+        <TextView
+            android:id="@+id/textViewFound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Foundation"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+        <CheckBox
+            android:id="@+id/found1"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Footings on non-uniform soil with no tie beams (-3)"
+            />
+
+        <CheckBox
+            android:id="@+id/found2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Footings on non-uniform soil with tie beams (-1)"
+            />
+
+        <CheckBox
+            android:id="@+id/found3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Footings on soft soil with no tie beams (-3)"
+            />
+
+        <CheckBox
+            android:id="@+id/found4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Footings on soft soil with tie beams (-1)"
+            />
+
+        <CheckBox
+            android:id="@+id/found5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mat foundation on nonuniform soil (-2)"
+            />
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="Plan Shape"
+            android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+            android:textAlignment="textEnd"/>
+        <CheckBox
+            android:id="@+id/plan1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Large room sizes (-5)"
+            />
+
+        <CheckBox
+            android:id="@+id/plan2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Irregular orientation of rooms (-3)"
+            />
+
+        <CheckBox
+            android:id="@+id/plan3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Complex overall shape with re-entrant corners (-5)"
+            />
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="Elevation Profile"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textAlignment="textEnd"
+            />
+
+        <CheckBox
+            android:id="@+id/elev1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Wider top, narrower bottom"
+            />
+
+        <CheckBox
+            android:id="@+id/elev2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Heavier top (-5)"
+            />
+
+        <CheckBox
+            android:id="@+id/elev3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Large projections or overhangs (-3)"
+            />
+
+        <CheckBox
+            android:id="@+id/elev4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Split roof  (-5)"
+            />
+
+        <CheckBox
+            android:id="@+id/elev5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Large storey heights  (-5)"
+            />
+
+        <CheckBox
+            android:id="@+id/elev6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Differences in storey heights  (-5)"
+            />
+
+        <CheckBox
+            android:id="@+id/elev7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Unsymmetrical staircase location with respect to plan  (-5)"
+            />
+
+        <CheckBox
+            android:id="@+id/elev8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Open ground storey not designed to resist earthquake shaking  (-40)"
+            />
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="Door and window openings in walls"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textAlignment="textEnd"
+            />
+
+        <CheckBox
+            android:id="@+id/door1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rare single window close to corners  (-1)"
+            />
+
+        <CheckBox
+            android:id="@+id/door2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="About half of openings close to corners  (-2)"
+            />
+
+        <CheckBox
+            android:id="@+id/door3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Almost all openings close to corners  (-4)"
+            />
+
+        <CheckBox
+            android:id="@+id/door4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Large area window openings  (-4)"
+            />
+
+        <CheckBox
+            android:id="@+id/door5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Large area door openings  (-6)"
+            />
+
+        <TextView
+            android:id="@+id/textView19"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="Distance from adjacent building"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textAlignment="textEnd"
+            />
+
+        <CheckBox
+            android:id="@+id/distance1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Houses touch each other (-3)"
+            />
+
+        <CheckBox
+            android:id="@+id/distance2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Houses have insufficient gap between them (-3)"
+            />
+
+        <TextView
+            android:id="@+id/textView20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="Parapets, objects on roof or projections"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textAlignment="textEnd"
+            />
+
+        <CheckBox
+            android:id="@+id/parapets1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Not secured to the structural system (-4)"
+            />
+
+        <CheckBox
+            android:id="@+id/parapets2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Large and heavy projections and overhangs"
+            />
+
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="Staircases"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textAlignment="textEnd"
+            />
+
+        <CheckBox
+            android:id="@+id/staircases1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Narrow (-1)"
+            />
+
+        <CheckBox
+            android:id="@+id/staircases2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Too few in number (-1)"
+            />
+
+        <CheckBox
+            android:id="@+id/staircases3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Too far to reach (-1)"
+            />
+
+        <TextView
+            android:id="@+id/textView23"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:textColor="#000000"
+            android:text="Structural Aspects (-20%)"
+            android:textAlignment="textEnd"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textView24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="Frame Grid"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textAlignment="textEnd"
+            />
+
+        <CheckBox
+            android:id="@+id/frame1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Grid of parallel planar frames only along one plan direction (-5)"
+            />
+
+        <CheckBox
+            android:id="@+id/frame2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No grid of parallel planar frames along both plan directions (-10)"
+            />
+
+        <CheckBox
+            android:id="@+id/frame3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Frames have symmetric lateral strength along one plan direction (-5)"
+            />
+
+        <CheckBox
+            android:id="@+id/frame4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Frames don’t have symmetric lateral strength along any plan direction (-10)"
+            />
+
+        <TextView
+            android:id="@+id/textView25"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="Roof/Floor slab design"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textAlignment="textEnd"
+            />
+
+        <CheckBox
+            android:id="@+id/roof1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Heavy roof/floor slab (-10)"
+            />
+
+        <CheckBox
+            android:id="@+id/roof2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pitched roof/floor slab (-5)"
+            />
+
+        <CheckBox
+            android:id="@+id/roof3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Split roof/floor slab (-10)"
+            />
+
+        <CheckBox
+            android:id="@+id/roof4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Roof/floor slab with large size openings, especially located along the edge of the slab (-10)"
+            />
+
+        <TextView
+            android:id="@+id/textView26"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="Roof/floor – column connection"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textAlignment="textEnd"
+            />
+
+        <CheckBox
+            android:id="@+id/roof_column1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No/insufficient anchorage of horizontal reinforcement from beams to columns at roof/floor levels (-10)"
+            />
+
+        <TextView
+            android:id="@+id/textView27"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="Member proportioning"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textAlignment="textEnd"
+            />
+
+        <CheckBox
+            android:id="@+id/member1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Column weaker (in moment capacity) than beams framing into it at each joint (-20)"
+            />
+
+        <TextView
+            android:id="@+id/textView28"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="Column and column – foundation connection"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textAlignment="textEnd"
+            />
+
+        <CheckBox
+            android:id="@+id/column1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No/insufficient anchorage of reinforcement from columns to foundation (-5)"
+            />
+
+        <CheckBox
+            android:id="@+id/column2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="All longitudinal bars in column lapped at same location (-15)"
+            />
+
+        <TextView
+            android:id="@+id/textView29"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="Staircase"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textAlignment="textEnd"
+            />
+
+        <CheckBox
+            android:id="@+id/struc_staircase1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Unsymmetrical location  (-5)"
+            />
+
+        <CheckBox
+            android:id="@+id/struc_staircase2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Both top and bottom integrally built into the building frame (-5)"
+            />
+
+        <CheckBox
+            android:id="@+id/struc_staircase3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Staircase not adequately separated from the house (-10)"
+            />
+
+        <TextView
+            android:id="@+id/textView30"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="Large water tanks on roof"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textAlignment="textEnd"
+            />
+
+        <CheckBox
+            android:id="@+id/tank1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Not anchored to the structural system (-4)"
+            />
+
+        <TextView
+            android:id="@+id/textView31"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:textColor="#000000"
+            android:text="Construction Details (-20%)"
+            android:textAlignment="textEnd"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textView32"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="Type of materials"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textAlignment="textEnd"
+            />
+
+        <CheckBox
+            android:id="@+id/materials1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Poor quality of sand (-10)"
+            />
+
+        <CheckBox
+            android:id="@+id/materials2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Poor quality of aggregates (-5)"
+            />
+
+        <CheckBox
+            android:id="@+id/materials3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Poor quality of cement (-10)"
+            />
+
+        <CheckBox
+            android:id="@+id/materials4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Poor quality of bricks (-5)"
+            />
+
+        <TextView
+            android:id="@+id/textView33"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="Workmanship"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textAlignment="textEnd"
+            />
+
+        <CheckBox
+            android:id="@+id/workmanship1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Poor geometries of masonry and roof (-3)"
+            />
+
+        <CheckBox
+            android:id="@+id/workmanship2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Insufficient curing  (-10)"
+            />
+
+        <TextView
+            android:id="@+id/textView34"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="Concrete mix"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textAlignment="textEnd"
+            />
+
+        <CheckBox
+            android:id="@+id/concrete1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Concrete prepared using nominal mix (-4)"
+            />
+
+        <CheckBox
+            android:id="@+id/concrete2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Concrete ingredients measured by volume batching (-4)"
+            />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="Life Threatening Factors"
+            android:textColor="#000000"
+            android:textAlignment="textEnd"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textViewSite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="Siting Issues"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+        <CheckBox
+            android:id="@+id/site1"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="The building is built on hill slopes that can slide"
+            />
+
+        <CheckBox
+            android:id="@+id/site2"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="The building is built on river terraces that can slide/creep"
+            />
+
+        <CheckBox
+            android:id="@+id/site3"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="The building is built on hill slopes /adjacent to hill slopes (even though on flat ground), but vulnerable to falling debris from the hilltop."
+            />
+
+        <TextView
+            android:id="@+id/textViewSoil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Soil and Foundation Condition"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+        <CheckBox
+            android:id="@+id/soil1"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="The soil underneath the building is liquefiable"
+            />
+
+        <CheckBox
+            android:id="@+id/soil2"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="The soil in the area adjoining the site is liquefiable and can flow laterally to move the soil from underneath the building"
+            />
+
+
+        <TextView
+            android:id="@+id/textViewArch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Architecture Features"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+        <CheckBox
+            android:id="@+id/arc1_check"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="The building has an open ground storey that is not designed to resist lateral loads, with/without structural walls in the ground storey"
+            />
+
+        <CheckBox
+            android:id="@+id/arc2_check"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="The building is almost touching or located close to an adjacent seemingly unsafe building/construction, whose collapse can damage it"
+            />
+
+        <TextView
+            android:id="@+id/textViewstruc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Structural Aspects"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+        <CheckBox
+            android:id="@+id/strc1_check"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="The minimum transverse dimension of columns is 200mm"
+            />
+
+        <CheckBox
+            android:id="@+id/strc2_check"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="The ties in columns have 90° hooks"
+            />
+
+        <CheckBox
+            android:id="@+id/strc3_check"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="The structural design of the building has not been performed by a competent engineer"
+            />
+
+        <TextView
+            android:id="@+id/textViewCons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Construction Details"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+
+        <CheckBox
+            android:id="@+id/con1_check"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Concrete used in columns is of grade M15 or lesser"
+            />
+
+        <CheckBox
+            android:id="@+id/con2_check"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Concrete used in columns is hand-mixed"
+            />
+
+        <CheckBox
+            android:id="@+id/con3_check"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Concrete placed in columns is not vibrated by any mechanical device"
+            />
+
+
+        <Button
+            android:id="@+id/postdataBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="108dp"
+            android:text="SUBMIT"
+            android:layout_gravity="center" />
+
+
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </ScrollView>
-

@@ -40,4 +40,13 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:4.9.3"
     implementation 'com.android.volley:volley:1.2.1'
 
+//    implementation 'com.github.zeeshan5422:Material-MultiSelection-Spinner:Tag'
+
+//    implementation 'com.github.Liocoder24x7:Advanced-Spinner'
+//    implementation 'com.github.pratikbutani:MultiSelectSpinner:1.0.1'
+//    implementation 'com.github.abumoallim:Android-Multi-Select-Dialog:v1.9'
+
+
+
+
 }
