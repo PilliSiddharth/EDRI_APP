@@ -45,7 +45,7 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
 
     EditText spectre_text, fsi_text;
-    CheckBox ch1,ch2,ch3,ch4,ch5,ch6,ch7,ch8,ch9,ch10,ch11,ch12,ch13,ch14,ch15,ch16,ch17;
+    CheckBox ch1,ch2,ch3,ch4,ch5,ch6,ch7,ch8,ch9,ch10,ch11,ch12,ch13,ch14,ch15,ch16,ch17,ch18,ch19,ch21,ch22,ch23,ch24,ch25,ch26,ch27,ch28,ch29,ch30,ch31,ch32,ch33,ch34,ch35,ch36,ch37,ch38,ch39,ch40,ch41,ch42,ch43,ch44,ch45,ch46,ch47,ch48,ch49,ch50,ch51,ch52,ch53,ch54,ch55,ch56,ch57,ch58,ch59,ch60,ch61,ch62,ch63,ch64,ch65,ch66,ch67,ch68,ch69,ch70,ch71;
 
     TextView coltextView;
     boolean[] selectedCol;
@@ -307,6 +307,7 @@ public class MainActivity extends AppCompatActivity {
         ch15 = (CheckBox)findViewById(R.id.lossSoil1);
         ch16 = (CheckBox)findViewById(R.id.lossSoil2);
         ch17 = (CheckBox)findViewById(R.id.suit_soil1);
+
 
 //        System.out.println(ch1_val);
 
