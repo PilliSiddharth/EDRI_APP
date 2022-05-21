@@ -44,6 +44,8 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
+    double z_val, soil_val, spectral_val, fsi_val, imp_val;
+
     EditText spectre_text, fsi_text;
     CheckBox ch1,ch2,ch3,ch4,ch5,ch6,ch7,ch8,ch9,ch10,ch11,ch12,ch13,ch14,ch15,ch16,ch17,ch18,ch19,ch20,ch21,ch22,ch23,ch24,ch25,ch26,ch27,ch28,ch29,ch30,ch31,ch32,ch33,ch34,ch35,ch36,ch37,ch38,ch39,ch40,ch41,ch42,ch43,ch44,ch45,ch46,ch47,ch48,ch49,ch50,ch51,ch52,ch53,ch54,ch55,ch56,ch57,ch58,ch59,ch60,ch61,ch62,ch63,ch64,ch65,ch66,ch67,ch68,ch69,ch70,ch71;
 
@@ -371,18 +373,57 @@ public class MainActivity extends AppCompatActivity {
         Button button = (Button) findViewById(R.id.postdataBtn);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-//                System.out.println(col_data);
-//                System.out.println(zone_data);
-//                System.out.println(soil_data);
-//                System.out.println(imp_data);
-//                System.out.println(ch1.isChecked());
-//                System.out.println(ch2_val);
-//                System.out.println(ch3_val);
-//                System.out.println(ch4_val);
-//                System.out.println(ch5_val);
-//                System.out.println(ch6_val);
+                switch (zone_array[z_ans]) {
+                    case "Zone-II":
+                        z_val = 0.10;
+                        break;
+                    case "Zone-III":
+                        z_val = 0.16;
+                        break;
+                    case "Zone-IV":
+                        z_val = 0.16;
+                        break;
+                    case "Zone-V":
+                        z_val = 0.36;
+                        break;
+                }
 
-//                saveData(createRequest());
+                switch (soil_array[s_ans]) {
+                    case "Hard Rock":
+                        soil_val = 1.0;
+                        break;
+                    case "Medium Soil":
+                        soil_val = 1.33;
+                        break;
+                    case "Soft Soil":
+                        soil_val = 1.67;
+                        break;
+                }
+
+                switch (imp_array[i_ans]) {
+                    case "Residence":
+                        imp_val = 1.0;
+                        break;
+                    case "Office":
+                        imp_val = 1.25;
+                        break;
+                    case "Commercial":
+                        imp_val = 1.5;
+                        break;
+                }
+
+                String spec_text = spectre_text.getText().toString();
+                spectral_val = Double.parseDouble(spec_text);
+
+                String fsi = fsi_text.getText().toString();
+                fsi_val = Double.parseDouble(fsi);
+
+                Double hazard_val = spectral_val*soil_val*z_val;
+                Double exposure_val = imp_val*fsi_val;
+
+                Toast.makeText(getApplicationContext(),Double.toString(hazard_val),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),Double.toString(exposure_val),Toast.LENGTH_SHORT).show();
+
 
             }
         });
