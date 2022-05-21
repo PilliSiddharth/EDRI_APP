@@ -45,7 +45,7 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
 
     EditText spectre_text, fsi_text;
-    CheckBox ch1,ch2,ch3,ch4,ch5,ch6,ch7,ch8,ch9,ch10,ch11,ch12,ch13,ch14,ch15,ch16,ch17,ch18,ch19,ch21,ch22,ch23,ch24,ch25,ch26,ch27,ch28,ch29,ch30,ch31,ch32,ch33,ch34,ch35,ch36,ch37,ch38,ch39,ch40,ch41,ch42,ch43,ch44,ch45,ch46,ch47,ch48,ch49,ch50,ch51,ch52,ch53,ch54,ch55,ch56,ch57,ch58,ch59,ch60,ch61,ch62,ch63,ch64,ch65,ch66,ch67,ch68,ch69,ch70,ch71;
+    CheckBox ch1,ch2,ch3,ch4,ch5,ch6,ch7,ch8,ch9,ch10,ch11,ch12,ch13,ch14,ch15,ch16,ch17,ch18,ch19,ch20,ch21,ch22,ch23,ch24,ch25,ch26,ch27,ch28,ch29,ch30,ch31,ch32,ch33,ch34,ch35,ch36,ch37,ch38,ch39,ch40,ch41,ch42,ch43,ch44,ch45,ch46,ch47,ch48,ch49,ch50,ch51,ch52,ch53,ch54,ch55,ch56,ch57,ch58,ch59,ch60,ch61,ch62,ch63,ch64,ch65,ch66,ch67,ch68,ch69,ch70,ch71;
 
     TextView coltextView;
     boolean[] selectedCol;
@@ -307,6 +307,59 @@ public class MainActivity extends AppCompatActivity {
         ch15 = (CheckBox)findViewById(R.id.lossSoil1);
         ch16 = (CheckBox)findViewById(R.id.lossSoil2);
         ch17 = (CheckBox)findViewById(R.id.suit_soil1);
+        ch18 = (CheckBox)findViewById(R.id.suit_soil2);
+        ch19 = (CheckBox)findViewById(R.id.found1);
+        ch20 = (CheckBox)findViewById(R.id.found2);
+        ch21 = (CheckBox)findViewById(R.id.found3);
+        ch22 = (CheckBox)findViewById(R.id.found4);
+        ch23 = (CheckBox)findViewById(R.id.plan1);
+        ch24 = (CheckBox)findViewById(R.id.plan2);
+        ch25 = (CheckBox)findViewById(R.id.plan3);
+        ch26 = (CheckBox)findViewById(R.id.elev1);
+        ch27 = (CheckBox)findViewById(R.id.elev2);
+        ch28 = (CheckBox)findViewById(R.id.elev3);
+        ch29 = (CheckBox)findViewById(R.id.elev4);
+        ch30 = (CheckBox)findViewById(R.id.elev5);
+        ch31 = (CheckBox)findViewById(R.id.elev6);
+        ch32 = (CheckBox)findViewById(R.id.elev7);
+        ch33 = (CheckBox)findViewById(R.id.elev8);
+        ch34 = (CheckBox)findViewById(R.id.door1);
+        ch35 = (CheckBox)findViewById(R.id.door2);
+        ch36 = (CheckBox)findViewById(R.id.door3);
+        ch39 = (CheckBox)findViewById(R.id.door4);
+        ch40 = (CheckBox)findViewById(R.id.door5);
+        ch41 = (CheckBox)findViewById(R.id.distance1);
+        ch42 = (CheckBox)findViewById(R.id.distance2);
+        ch43 = (CheckBox)findViewById(R.id.parapets1);
+        ch44 = (CheckBox)findViewById(R.id.parapets2);
+        ch45 = (CheckBox)findViewById(R.id.staircases1);
+        ch46 = (CheckBox)findViewById(R.id.staircases2);
+        ch47 = (CheckBox)findViewById(R.id.staircases3);
+        ch48 = (CheckBox)findViewById(R.id.frame1);
+        ch49 = (CheckBox)findViewById(R.id.frame2);
+        ch50 = (CheckBox)findViewById(R.id.frame3);
+        ch51 = (CheckBox)findViewById(R.id.frame4);
+        ch52 = (CheckBox)findViewById(R.id.roof1);
+        ch53 = (CheckBox)findViewById(R.id.roof2);
+        ch54 = (CheckBox)findViewById(R.id.roof3);
+        ch55 = (CheckBox)findViewById(R.id.roof4);
+        ch56 = (CheckBox)findViewById(R.id.roof_column1);
+        ch57 = (CheckBox)findViewById(R.id.member1);
+        ch58 = (CheckBox)findViewById(R.id.column1);
+        ch59 = (CheckBox)findViewById(R.id.column2);
+        ch60 = (CheckBox)findViewById(R.id.struc_staircase1);
+        ch61 = (CheckBox)findViewById(R.id.struc_staircase2);
+        ch62 = (CheckBox)findViewById(R.id.struc_staircase3);
+        ch63 = (CheckBox)findViewById(R.id.tank1);
+        ch64 = (CheckBox)findViewById(R.id.materials1);
+        ch65 = (CheckBox)findViewById(R.id.materials2);
+        ch66 = (CheckBox)findViewById(R.id.materials3);
+        ch67 = (CheckBox)findViewById(R.id.materials4);
+        ch68 = (CheckBox)findViewById(R.id.workmanship1);
+        ch69 = (CheckBox)findViewById(R.id.workmanship2);
+        ch70 = (CheckBox)findViewById(R.id.concrete1);
+        ch71 = (CheckBox)findViewById(R.id.concrete2);
+
 
 
 //        System.out.println(ch1_val);
