@@ -61,21 +61,21 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Integer> zone_list = new ArrayList<>();
     ArrayList<String> zone_data = new ArrayList<>();
     String[] zone_array = {"Zone-II","Zone-III","Zone-IV","Zone-V"};
-    int z_ans = 0;
+    int z_ans = -1;
 
     TextView soiltextView;
     boolean[] selectedsoil;
     ArrayList<Integer> soil_list = new ArrayList<>();
     ArrayList<String> soil_data = new ArrayList<>();
     String[] soil_array = {"Hard Rock", "Medium Soil", "Soft Soil"};
-    int s_ans = 0;
+    int s_ans = -1;
 
     TextView imptextView;
     boolean[] selectedimp;
     ArrayList<Integer> imp_list = new ArrayList<>();
     ArrayList<String> imp_data = new ArrayList<>();
     String[] imp_array = {"Residence", "Office", "Commercial"};
-    int i_ans = 0;
+    int i_ans = -1;
 
 
     @Override
@@ -159,8 +159,8 @@ public class MainActivity extends AppCompatActivity {
 
                 builder.setTitle("Select Zone Factor");
                 builder.setCancelable(false);
-
-                builder.setSingleChoiceItems(zone_array, -1, new DialogInterface.OnClickListener() {
+//                z_ans = -1;
+                builder.setSingleChoiceItems(zone_array, z_ans, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         z_ans = i;
@@ -208,7 +208,7 @@ public class MainActivity extends AppCompatActivity {
                 builder.setTitle("Select Soil Type");
                 builder.setCancelable(false);
 
-                builder.setSingleChoiceItems(soil_array, -1, new DialogInterface.OnClickListener() {
+                builder.setSingleChoiceItems(soil_array, s_ans, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         s_ans = i;
                     }
@@ -255,7 +255,7 @@ public class MainActivity extends AppCompatActivity {
                 builder.setTitle("Select Importance Type");
                 builder.setCancelable(false);
 
-                builder.setSingleChoiceItems(imp_array, -1, new DialogInterface.OnClickListener() {
+                builder.setSingleChoiceItems(imp_array, i_ans, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         i_ans = i;

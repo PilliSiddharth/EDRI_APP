@@ -14,6 +14,8 @@
         android:gravity="start"
         tools:context=".MainActivity">
 
+
+
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
@@ -35,6 +37,7 @@
             android:textSize="16sp"
             android:textStyle="bold"/>
 
+
         <TextView
             android:id="@+id/ColtextView"
             android:layout_width="match_parent"
@@ -46,6 +49,8 @@
             android:drawablePadding="16dp"
             android:hint="Select Collateral Damage"
             android:padding="12dp" />
+
+        <!--            app:dividerColor="@color/black"-->
 
 <!--        <com.androidbuts.multispinnerfilter.MultiSpinnerSearch-->
 <!--            android:id="@+id/colSpin"-->
