@@ -379,7 +379,8 @@ public class MainActivity extends AppCompatActivity {
         Button button = (Button) findViewById(R.id.postdataBtn);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
+                AlertDialog.Builder errbuilder = new AlertDialog.Builder(MainActivity.this);
+                try {
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
                 builder.setTitle("Building Safety Alert")
@@ -399,6 +400,23 @@ public class MainActivity extends AppCompatActivity {
                             }
                         });
 
+
+                    errbuilder.setTitle("Required Fields")
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setCancelable(false)
+                            .setMessage("Make sure to Fill all the required Fields.")
+//                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                Toast.makeText(MainActivity.this,"Selected Option: YES",Toast.LENGTH_SHORT).show();
+//                            }
+//                        })
+                            .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+//                                Toast.makeText(MainActivity.this,"Selected Option: No",Toast.LENGTH_SHORT).show();
+                                }
+                            });
                 if (ch14.isChecked())
                     lossSite1 = 5;
                 if (ch15.isChecked())
@@ -566,34 +584,39 @@ public class MainActivity extends AppCompatActivity {
                 }
 
 
-                String spec_text = spectre_text.getText().toString();
-                spectral_val = Double.parseDouble(spec_text);
+                    String spec_text = spectre_text.getText().toString();
+                    spectral_val = Double.parseDouble(spec_text);
 
-                String fsi = fsi_text.getText().toString();
-                fsi_val = Double.parseDouble(fsi);
+                    String fsi = fsi_text.getText().toString();
+                    fsi_val = Double.parseDouble(fsi);
 
-                String stories = stories_text.getText().toString();
-                stories_val = Integer.parseInt(stories);
+                    String stories = stories_text.getText().toString();
+                    stories_val = Integer.parseInt(stories);
 
-                Integer economic_loss_sum = lossSite1 + lossSoil1 + lossSoil2 + suit_soil1 + suit_soil2 + found1 + found2 + found3 + found4 + found5 + plan1 + plan2 + plan3 + elev1 + elev2 + elev3 + elev4 + elev5 + elev6 + elev7 + elev8 + door1 + door2 + door3 + door4 + door5 + distance1 + distance2 + parapets1 + parapets2 + staircases1 + staircases2 + staircases3 + frame1 + frame2 + frame3 + frame4 + frame5 + frame6 + roof1 + roof2 + roof3 + roof4 + roof_column1 + member1 + column1 + column2 + struc_staircase1 + struc_staircase2 + struc_staircase3 + tank1 + materials1 + materials2 + materials3 + materials4 + workmanship1 + workmanship2 + concrete1 + concrete2;
+                    Integer economic_loss_sum = lossSite1 + lossSoil1 + lossSoil2 + suit_soil1 + suit_soil2 + found1 + found2 + found3 + found4 + found5 + plan1 + plan2 + plan3 + elev1 + elev2 + elev3 + elev4 + elev5 + elev6 + elev7 + elev8 + door1 + door2 + door3 + door4 + door5 + distance1 + distance2 + parapets1 + parapets2 + staircases1 + staircases2 + staircases3 + frame1 + frame2 + frame3 + frame4 + frame5 + frame6 + roof1 + roof2 + roof3 + roof4 + roof_column1 + member1 + column1 + column2 + struc_staircase1 + struc_staircase2 + struc_staircase3 + tank1 + materials1 + materials2 + materials3 + materials4 + workmanship1 + workmanship2 + concrete1 + concrete2;
 
-                economic_loss = economic_loss_sum / 100.0;
+                    economic_loss = economic_loss_sum / 100.0;
 
-                Double hazard_val = spectral_val * soil_val * z_val;
-                Double exposure_val = imp_val * fsi_val;
+                    Double hazard_val = spectral_val * soil_val * z_val;
+                    Double exposure_val = imp_val * fsi_val;
 
-                String hazard_string = String.format("Hazard Value is: %f", hazard_val);
-                String exposure_string = String.format("Exposure Value is: %f", exposure_val);
-                String vulner_string = String.format("Economic Loss Inducing Factors Value is: %f", economic_loss);
-
-                if (ch1.isChecked() || ch2.isChecked() || ch3.isChecked() || ch4.isChecked() || ch5.isChecked() || ch6.isChecked() || ch7.isChecked() || ch8.isChecked() || ch9.isChecked() || ch10.isChecked() || ch11.isChecked() || ch12.isChecked() || ch13.isChecked()) {
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
-                } else {
-                    Toast.makeText(getApplicationContext(), hazard_string, Toast.LENGTH_SHORT).show();
-                    Toast.makeText(getApplicationContext(), exposure_string, Toast.LENGTH_SHORT).show();
-                    Toast.makeText(getApplicationContext(), vulner_string, Toast.LENGTH_SHORT).show();
+                    String hazard_string = String.format("Hazard Value is: %f", hazard_val);
+                    String exposure_string = String.format("Exposure Value is: %f", exposure_val);
+                    String vulner_string = String.format("Economic Loss Inducing Factors Value is: %f", economic_loss);
+                    if (ch1.isChecked() || ch2.isChecked() || ch3.isChecked() || ch4.isChecked() || ch5.isChecked() || ch6.isChecked() || ch7.isChecked() || ch8.isChecked() || ch9.isChecked() || ch10.isChecked() || ch11.isChecked() || ch12.isChecked() || ch13.isChecked()) {
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), hazard_string, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), exposure_string, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), vulner_string, Toast.LENGTH_SHORT).show();
+                    }
                 }
+                catch (Exception e) {
+                    AlertDialog dialog = errbuilder.create();
+                    dialog.show();
+                }
+
             }
         });
     }}
