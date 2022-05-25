@@ -162,7 +162,6 @@ public class MainActivity extends AppCompatActivity {
 
                 builder.setTitle("Select Zone Factor");
                 builder.setCancelable(false);
-//                z_ans = -1;
                 builder.setSingleChoiceItems(zone_array, z_ans, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -187,12 +186,9 @@ public class MainActivity extends AppCompatActivity {
                 builder.setNeutralButton("Clear All", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        for (int j = 0; j < selectedzone.length; j++) {
-                            selectedzone[j] = false;
-                            zone_list.clear();
+                            z_ans  = -1;
                             zonetextView.setText("");
                         }
-                    }
                 });
                 builder.show();
 //                System.out.println(stringb);
@@ -234,12 +230,9 @@ public class MainActivity extends AppCompatActivity {
                 builder.setNeutralButton("Clear All", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        for (int j = 0; j < selectedsoil.length; j++) {
-                            selectedsoil[j] = false;
-                            soil_list.clear();
+                            s_ans = -1;
                             soiltextView.setText("");
                         }
-                    }
                 });
                 builder.show();
 //                System.out.println(stringb);
@@ -283,12 +276,9 @@ public class MainActivity extends AppCompatActivity {
                 builder.setNeutralButton("Clear All", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        for (int j = 0; j < selectedimp.length; j++) {
-                            selectedimp[j] = false;
-                            imp_list.clear();
+                            i_ans = -1;
                             imptextView.setText("");
                         }
-                    }
                 });
                 builder.show();
 //                System.out.println(stringb);
