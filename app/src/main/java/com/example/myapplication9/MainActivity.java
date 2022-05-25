@@ -378,26 +378,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 AlertDialog.Builder errbuilder = new AlertDialog.Builder(MainActivity.this);
                 try {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-
-                    builder.setTitle("Building Safety Alert")
-                            .setIcon(android.R.drawable.ic_dialog_alert)
-                            .setMessage("This building's safety is compromised because of it's life threatening factors, please contact the needed authorities.")
-                            .setCancelable(false)
-//                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                Toast.makeText(MainActivity.this,"Selected Option: YES",Toast.LENGTH_SHORT).show();
-//                            }
-//                        })
-                            .setNegativeButton("OK", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-//                                Toast.makeText(MainActivity.this,"Selected Option: No",Toast.LENGTH_SHORT).show();
-                                }
-                            });
-
-
                     errbuilder.setTitle("Required Fields")
                             .setIcon(android.R.drawable.ic_dialog_alert)
                             .setCancelable(false)
@@ -604,6 +584,18 @@ public class MainActivity extends AppCompatActivity {
                         String hazard_string = String.format("Hazard Value is: %f", hazard_val);
                         String exposure_string = String.format("Exposure Value is: %f", exposure_val);
                         String vulner_string = String.format("Economic Loss Inducing Factors Value is: %f", economic_loss);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+
+                        builder.setTitle("Building Safety Alert")
+                                .setIcon(android.R.drawable.ic_dialog_alert)
+                                .setMessage("This building's safety is compromised because of it's life threatening factors, please contact the needed authorities.\n\nAlthough the Values of various factors are as follows:\n\n" + hazard_string + "\n" + exposure_string + "\n" + vulner_string + "\n")
+                                .setCancelable(false)
+
+                                .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                    }
+                                });
                         if (ch1.isChecked() || ch2.isChecked() || ch3.isChecked() || ch4.isChecked() || ch5.isChecked() || ch6.isChecked() || ch7.isChecked() || ch8.isChecked() || ch9.isChecked() || ch10.isChecked() || ch11.isChecked() || ch12.isChecked() || ch13.isChecked()) {
                             AlertDialog dialog = builder.create();
                             dialog.show();
