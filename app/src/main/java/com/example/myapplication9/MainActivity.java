@@ -378,26 +378,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 AlertDialog.Builder errbuilder = new AlertDialog.Builder(MainActivity.this);
                 try {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-
-                    builder.setTitle("Building Safety Alert")
-                            .setIcon(android.R.drawable.ic_dialog_alert)
-                            .setMessage("This building's safety is compromised because of it's life threatening factors, please contact the needed authorities.")
-                            .setCancelable(false)
-//                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                Toast.makeText(MainActivity.this,"Selected Option: YES",Toast.LENGTH_SHORT).show();
-//                            }
-//                        })
-                            .setNegativeButton("OK", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-//                                Toast.makeText(MainActivity.this,"Selected Option: No",Toast.LENGTH_SHORT).show();
-                                }
-                            });
-
-
                     errbuilder.setTitle("Required Fields")
                             .setIcon(android.R.drawable.ic_dialog_alert)
                             .setCancelable(false)
@@ -539,8 +519,8 @@ public class MainActivity extends AppCompatActivity {
 //                    AlertDialog dialog = builder.create();
 //                    dialog.show();
 //                }else {
-                    isAllFieldsChecked = CheckAllFields();
-                    if (isAllFieldsChecked) {
+
+                    if (CheckZone() & CheckSoil() & CheckImp() & CheckSpectre() & CheckStories() & CheckFsi()) {
 
 
                         switch (zone_array[z_ans]) {
@@ -597,13 +577,30 @@ public class MainActivity extends AppCompatActivity {
                         Integer economic_loss_sum = lossSite1 + lossSoil1 + lossSoil2 + suit_soil1 + suit_soil2 + found1 + found2 + found3 + found4 + found5 + plan1 + plan2 + plan3 + elev1 + elev2 + elev3 + elev4 + elev5 + elev6 + elev7 + elev8 + door1 + door2 + door3 + door4 + door5 + distance1 + distance2 + parapets1 + parapets2 + staircases1 + staircases2 + staircases3 + frame1 + frame2 + frame3 + frame4 + frame5 + frame6 + roof1 + roof2 + roof3 + roof4 + roof_column1 + member1 + column1 + column2 + struc_staircase1 + struc_staircase2 + struc_staircase3 + tank1 + materials1 + materials2 + materials3 + materials4 + workmanship1 + workmanship2 + concrete1 + concrete2;
 
                         economic_loss = economic_loss_sum / 100.0;
-
                         Double hazard_val = spectral_val * soil_val * z_val;
                         Double exposure_val = imp_val * fsi_val;
+
+                        Double risk_val = economic_loss * hazard_val * exposure_val;
 
                         String hazard_string = String.format("Hazard Value is: %f", hazard_val);
                         String exposure_string = String.format("Exposure Value is: %f", exposure_val);
                         String vulner_string = String.format("Economic Loss Inducing Factors Value is: %f", economic_loss);
+                        String risk_string = String.format("Risk Value is: %f",risk_val);
+
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+
+                        builder.setTitle("Building Safety Alert")
+                                .setIcon(android.R.drawable.ic_dialog_alert)
+                                .setMessage("This building's safety is compromised because of it's life threatening factors, please contact the needed authorities.\n\nAlthough the Values of various factors are as follows:\n\n" + hazard_string + "\n" + exposure_string + "\n" + vulner_string + "\n"+ "Risk Value is: 100%" + "\n")
+                                .setCancelable(false)
+
+                                .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                    }
+                                });
+
                         if (ch1.isChecked() || ch2.isChecked() || ch3.isChecked() || ch4.isChecked() || ch5.isChecked() || ch6.isChecked() || ch7.isChecked() || ch8.isChecked() || ch9.isChecked() || ch10.isChecked() || ch11.isChecked() || ch12.isChecked() || ch13.isChecked()) {
                             AlertDialog dialog = builder.create();
                             dialog.show();
@@ -627,32 +624,54 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private boolean CheckAllFields() {
-        if (z_ans == -1) {
+    private boolean CheckZone() {
+        if (zonetextView.getText().length() == 0) {
             zonetextView.setError("This field is required");
-//            return false;
+            return false;
+        }else{
+            return true;
+        }}
+
+    private boolean CheckSoil() {
+            if (soiltextView.getText().length() == 0) {
+                soiltextView.setError("This field is required");
+                return false;
+            } else {
+                return true;
+            }
         }
-        if (s_ans == -1) {
-            soiltextView.setError("This field is required");
-//            return false;
-        }
-        if (i_ans == -1) {
+
+    private boolean CheckImp() {
+        if (imptextView.getText().length() == 0) {
             imptextView.setError("This field is required");
-//            return false;
-        }
-        if (stories_text.length() == 0) {
+            return false;
+        }else{
+            return true;
+        }}
+
+    private boolean CheckStories() {
+            if (stories_text.length() == 0) {
             stories_text.setError("This field is required");
-//            return false;
-        }
+            return false;
+        }else{
+                return true;
+            }
+            }
+    private boolean CheckSpectre() {
         if (spectre_text.length() == 0) {
             spectre_text.setError("This field is required");
-//            return false;
-        }
+            return false;
+        }else{
+            return true;
+        }}
+    private boolean CheckFsi() {
         if (fsi_text.length() == 0) {
             fsi_text.setError("This field is required");
             return false;
+        }else{
+            return true;
         }
+    }}
+//        return true;
 
-        return true;
-    }
-}
+
