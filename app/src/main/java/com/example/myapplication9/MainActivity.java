@@ -8,6 +8,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Environment;
 import android.util.Log;
@@ -21,6 +24,7 @@ import android.widget.Toast;
 import android.widget.EditText;
 
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -32,10 +36,16 @@ import java.util.HashSet;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
+import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+
 
 import java.util.List;
 import java.util.Set;
@@ -48,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
     double z_val, soil_val, spectral_val, fsi_val, imp_val;
     Integer stories_val;
 
-    ArrayList checkbox_data = new ArrayList();
+    ArrayList<String> checkbox_data = new ArrayList<>();
 
     boolean isAllFieldsChecked = false;
 
@@ -839,18 +849,9 @@ public class MainActivity extends AppCompatActivity {
 
 //            para.getAccessibilityProperties().setRole(StandardRoles.H1);(
 
-            Paragraph intro = new Paragraph("EDRI - Calculator has generated a pdf which contains all the required data and calculations to understand the safety of the structure, please read the pdf thoroughly to understand which features add risk to the structures.");
-            Paragraph col_haz = new Paragraph("\nCollateral Hazard: ");
-            Paragraph zone_text_pdf = new Paragraph("\nSeismic Zone: "+zone_array[z_ans]);
-            Paragraph soil_text_pdf = new Paragraph("\nSoil Type: " +soil_array[s_ans]);
-            Paragraph storeys_text_pdf = new Paragraph("\nNumber of Storeys: "+stories_text.getText().toString());
-            Paragraph spectral_shape_pdf = new Paragraph("\nSpectral_Shape: "+spectre_text.getText().toString());
-            Paragraph imp_text_pdf = new Paragraph("\nImportance of the Structure: "+imp_array[i_ans]);
-            Paragraph fsi_text_pdf = new Paragraph("\nFSI of the Structure: "+fsi_text.getText().toString());
+            Paragraph intro = new Paragraph("\nEDRI - Calculator has generated a pdf which contains all the required data and calculations to understand the safety of the structure, please read the pdf thoroughly to understand which features add risk to the structures.\n");
 
-
-
-            Paragraph col_haz_empty = new Paragraph("There are no Collateral Hazards");
+//            Paragraph col_haz_empty = new Paragraph("There are no Collateral Hazards");
 
 //            for(int i = 0; i<col_data.size(); i++){
 ////                List col_pdf = new List();
@@ -863,33 +864,313 @@ public class MainActivity extends AppCompatActivity {
             doc.add(new Paragraph("EDRI - Calculator\n", FontFactory.getFont(FontFactory.HELVETICA
                     ,30, Font.BOLD, BaseColor.BLACK)));
 
+            Drawable d = getResources().getDrawable(R.drawable.hdpi);
+            BitmapDrawable bitDw = ((BitmapDrawable) d);
+            Bitmap bmp = bitDw.getBitmap();
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            Image image = Image.getInstance(stream.toByteArray());
+            image.setAlignment(Element.ALIGN_LEFT);
+            image.scaleAbsolute(50, 50);
+
+
+            doc.add(image);
+//            image1.setAlignment(Element.ALIGN_LEFT);
+//            image1.scaleAbsolute(450, 250);
+
 
             doc.add(intro);
-            doc.add(col_haz);
+            doc.add(new Paragraph("\n"));
+//            doc.add(col_haz);
+//            PdfPTable header_row = new PdfPTable(1);
+//            header_row.setKeepTogether(true);
+//            header_row.addCell(col_haz);
+//
+//            PdfPTable body_haz_row = new PdfPTable(2);
+//            body_haz_row.setKeepTogether(true);
 
 
-            if (col_data.isEmpty()){
-                doc.add(col_haz_empty);
-            }else {
+//            c1.getHorizontalAlignment(align)
+
+//            if (col_data.isEmpty()){
+//                body_haz_row.addCell(col_haz_empty);
+////                doc.add(col_haz_empty);
+//            }else {
 //                List samp = new List();
-                ArrayList l = new ArrayList();
+            ArrayList l = new ArrayList();
 
-                for(int j = 0; j<col_data.size();j++){
-                    l.add(col_data.get(j));
-                }
-                Set s = new HashSet(l);
-                List<String> ll = new ArrayList<String>(s);
-                for(int i=0;i<ll.size();i++)
-                {
-                    doc.add(new Paragraph("-> "+ll.get(i)));
-                }
+            for(int j = 0; j<col_data.size();j++){
+                l.add(col_data.get(j));
             }
-            doc.add(zone_text_pdf);
-            doc.add(soil_text_pdf);
-            doc.add(storeys_text_pdf);
-            doc.add(spectral_shape_pdf);
-            doc.add(imp_text_pdf);
-            doc.add(fsi_text_pdf);
+            Set s = new HashSet(l);
+            List<String> ll = new ArrayList<String>(s);
+            com.itextpdf.text.List ktf  = new com.itextpdf.text.List();
+            for(int i=0;i<ll.size();i++){
+                ktf.add(ll.get(i));
+            }
+
+
+
+            Phrase phrase = new Phrase();
+            phrase.add(ktf);
+            PdfPCell phraseCell = new PdfPCell();
+            phraseCell.addElement(phrase);
+
+            PdfPTable phraseTable = new PdfPTable(2);
+            phraseTable.setSpacingBefore(5);
+            phraseTable.addCell("Collateral Damage: ");
+            phraseTable.addCell(phraseCell);
+
+            Phrase phraseTableWrapper = new Phrase();
+            phraseTableWrapper.add(phraseTable);
+            doc.add(phraseTableWrapper);
+            doc.add(new Paragraph("\n"));
+
+
+            PdfPCell cell = new PdfPCell();
+            cell.addElement(ktf);
+
+            PdfPTable table = new PdfPTable(2);
+            table.setSpacingBefore(5);
+            table.addCell("List placed directly into cell");
+            table.addCell(cell);
+
+//            Zone Column
+
+            com.itextpdf.text.List zone_table_list = new com.itextpdf.text.List();
+            zone_table_list.add(zone_array[z_ans]);
+            Phrase zone_phrase = new Phrase();
+            zone_phrase.add(zone_table_list);
+            PdfPCell zone_phraseCell = new PdfPCell();
+            zone_phraseCell.addElement(zone_phrase);
+
+            PdfPTable zone_phraseTable = new PdfPTable(2);
+            zone_phraseTable.setSpacingBefore(5);
+            zone_phraseTable.addCell("Seismic Zone: ");
+            zone_phraseTable.addCell(zone_phraseCell);
+
+            Phrase zone_phraseTableWrapper = new Phrase();
+            zone_phraseTableWrapper.add(zone_phraseTable);
+            doc.add(zone_phraseTableWrapper);
+            doc.add(new Paragraph("\n"));
+
+
+            PdfPCell zone_cell = new PdfPCell();
+            zone_cell.addElement(zone_table_list);
+//            zone_cell.addElement(zone_array[z_ans]);
+
+            PdfPTable zone_table = new PdfPTable(2);
+            zone_table.setSpacingBefore(5);
+            zone_table.addCell("List placed directly into cell");
+            zone_table.addCell(zone_cell);
+
+//            Soil Column
+
+            com.itextpdf.text.List soil_table_list = new com.itextpdf.text.List();
+            soil_table_list.add(soil_array[s_ans]);
+            Phrase soil_phrase = new Phrase();
+            soil_phrase.add(soil_table_list);
+            PdfPCell soil_phraseCell = new PdfPCell();
+            soil_phraseCell.addElement(soil_phrase);
+
+            PdfPTable soil_phraseTable = new PdfPTable(2);
+            soil_phraseTable.setSpacingBefore(5);
+            soil_phraseTable.addCell("Soil Type: ");
+            soil_phraseTable.addCell(soil_phraseCell);
+
+            Phrase soil_phraseTableWrapper = new Phrase();
+            soil_phraseTableWrapper.add(soil_phraseTable);
+            doc.add(soil_phraseTableWrapper);
+            doc.add(new Paragraph("\n"));
+
+
+            PdfPCell soil_cell = new PdfPCell();
+            soil_cell.addElement(soil_table_list);
+//            zone_cell.addElement(zone_array[z_ans]);
+
+            PdfPTable soil_table = new PdfPTable(2);
+            soil_table.setSpacingBefore(5);
+            soil_table.addCell("List placed directly into cell");
+            soil_table.addCell(soil_cell);
+
+
+            com.itextpdf.text.List storeys_table_list = new com.itextpdf.text.List();
+            storeys_table_list.add(stories_text.getText().toString());
+            Phrase storeys_phrase = new Phrase();
+            storeys_phrase.add(storeys_table_list);
+            PdfPCell storeys_phraseCell = new PdfPCell();
+            storeys_phraseCell.addElement(storeys_phrase);
+
+            PdfPTable storeys_phraseTable = new PdfPTable(2);
+            storeys_phraseTable.setSpacingBefore(5);
+            storeys_phraseTable.addCell("Storeys of the Structure: ");
+            storeys_phraseTable.addCell(storeys_phraseCell);
+
+            Phrase storeys_phraseTableWrapper = new Phrase();
+            storeys_phraseTableWrapper.add(storeys_phraseTable);
+            doc.add(storeys_phraseTableWrapper);
+            doc.add(new Paragraph("\n"));
+
+
+            PdfPCell storeys_cell = new PdfPCell();
+            storeys_cell.addElement(storeys_table_list);
+//            zone_cell.addElement(zone_array[z_ans]);
+
+            PdfPTable storeys_table = new PdfPTable(2);
+            storeys_table.setSpacingBefore(5);
+            storeys_table.addCell("List placed directly into cell");
+            storeys_table.addCell(storeys_cell);
+
+
+            com.itextpdf.text.List spectre_table_list = new com.itextpdf.text.List();
+            spectre_table_list.add(spectre_text.getText().toString());
+            Phrase spectre_phrase = new Phrase();
+            spectre_phrase.add(spectre_table_list);
+            PdfPCell spectre_phraseCell = new PdfPCell();
+            spectre_phraseCell.addElement(spectre_phrase);
+
+            PdfPTable spectre_phraseTable = new PdfPTable(2);
+            spectre_phraseTable.setSpacingBefore(5);
+            spectre_phraseTable.addCell("Spectral Shape: ");
+            spectre_phraseTable.addCell(spectre_phraseCell);
+
+            Phrase spectre_phraseTableWrapper = new Phrase();
+            spectre_phraseTableWrapper.add(spectre_phraseTable);
+            doc.add(spectre_phraseTableWrapper);
+            doc.add(new Paragraph("\n"));
+
+
+            PdfPCell spectre_cell = new PdfPCell();
+            spectre_cell.addElement(spectre_table_list);
+//            zone_cell.addElement(zone_array[z_ans]);
+
+            PdfPTable spectre_table = new PdfPTable(2);
+            spectre_table.setSpacingBefore(5);
+            spectre_table.addCell("List placed directly into cell");
+            spectre_table.addCell(spectre_cell);
+
+
+            com.itextpdf.text.List imp_table_list = new com.itextpdf.text.List();
+            imp_table_list.add(imp_array[i_ans]);
+            Phrase imp_phrase = new Phrase();
+            imp_phrase.add(imp_table_list);
+            PdfPCell imp_phraseCell = new PdfPCell();
+            imp_phraseCell.addElement(imp_phrase);
+
+            PdfPTable imp_phraseTable = new PdfPTable(2);
+            imp_phraseTable.setSpacingBefore(5);
+            imp_phraseTable.addCell("Importance of the Structure: ");
+            imp_phraseTable.addCell(imp_phraseCell);
+
+            Phrase imp_phraseTableWrapper = new Phrase();
+            imp_phraseTableWrapper.add(imp_phraseTable);
+            doc.add(imp_phraseTableWrapper);
+            doc.add(new Paragraph("\n"));
+
+            PdfPCell imp_cell = new PdfPCell();
+            imp_cell.addElement(imp_table_list);
+//            zone_cell.addElement(zone_array[z_ans]);
+
+            PdfPTable imp_table = new PdfPTable(2);
+            imp_table.setSpacingBefore(5);
+            imp_table.addCell("List placed directly into cell");
+            imp_table.addCell(imp_cell);
+
+
+            com.itextpdf.text.List fsi_table_list = new com.itextpdf.text.List();
+            fsi_table_list.add(fsi_text.getText().toString());
+            Phrase fsi_phrase = new Phrase();
+            fsi_phrase.add(fsi_table_list);
+            PdfPCell fsi_phraseCell = new PdfPCell();
+            fsi_phraseCell.addElement(fsi_phrase);
+
+            PdfPTable fsi_phraseTable = new PdfPTable(2);
+            fsi_phraseTable.setSpacingBefore(5);
+            fsi_phraseTable.addCell("Floor Space Index of the Structure(FSI):  ");
+            fsi_phraseTable.addCell(fsi_phraseCell);
+
+            Phrase fsi_phraseTableWrapper = new Phrase();
+            fsi_phraseTableWrapper.add(fsi_phraseTable);
+            doc.add(fsi_phraseTableWrapper);
+            doc.add(new Paragraph("\n"));
+
+            PdfPCell fsi_cell = new PdfPCell();
+            fsi_cell.addElement(fsi_table_list);
+//            zone_cell.addElement(zone_array[z_ans]);
+
+            PdfPTable fsi_table = new PdfPTable(2);
+            fsi_table.setSpacingBefore(5);
+            fsi_table.addCell("List placed directly into cell");
+            fsi_table.addCell(fsi_cell);
+
+
+            System.out.println(checkbox_data);
+
+            Set economic_set = new HashSet(checkbox_data);
+            List<String> economic_list = new ArrayList<String>(economic_set);
+            com.itextpdf.text.List economic_table_list_array  = new com.itextpdf.text.List();
+            for(int sts=0;sts<economic_list.size();sts++){
+//                    doc.add(new Paragraph("-> "+ll.get(i)));
+                economic_table_list_array.add(economic_list.get(sts)+"\n\n");
+            }
+
+            Phrase eco_phrase = new Phrase();
+            eco_phrase.add(economic_table_list_array);
+            PdfPCell eco_phraseCell = new PdfPCell();
+            eco_phraseCell.addElement(eco_phrase);
+
+            PdfPTable eco_phraseTable = new PdfPTable(2);
+            eco_phraseTable.setSpacingBefore(5);
+            eco_phraseTable.addCell("Economic Loss Inducing Factors: ");
+            eco_phraseTable.addCell(eco_phraseCell);
+
+            Phrase eco_phraseTableWrapper = new Phrase();
+            eco_phraseTableWrapper.add(eco_phraseTable);
+            doc.add(eco_phraseTableWrapper);
+            doc.add(new Paragraph("\n"));
+
+
+            PdfPCell eco_cell = new PdfPCell();
+            eco_cell.addElement(economic_table_list_array);
+
+            PdfPTable eco_table = new PdfPTable(2);
+            eco_table.setSpacingBefore(5);
+            eco_table.addCell("List placed directly into cell");
+            eco_table.addCell(cell);
+
+
+//            Phrase eco_phrase = new Phrase();
+//            phrase.add(economic_table_list_array);
+//            PdfPCell eco_phraseCell = new PdfPCell();
+//            eco_phraseCell.addElement(eco_phrase);
+//
+//            PdfPTable eco_phraseTable = new PdfPTable(2);
+//            eco_phraseTable.setSpacingBefore(5);
+//            eco_phraseTable.addCell("Collateral Damage: ");
+//            eco_phraseTable.addCell(eco_phraseCell);
+//
+//            Phrase eco_phraseTableWrapper = new Phrase();
+//            eco_phraseTableWrapper.add(eco_phraseTable);
+//            doc.add(eco_phraseTableWrapper);
+//            doc.add(new Paragraph("\n"));
+//
+//
+//            PdfPCell eco_cell = new PdfPCell();
+//            eco_cell.addElement(economic_table_list_array);
+//
+//            PdfPTable eco_table = new PdfPTable(2);
+//            table.setSpacingBefore(5);
+//            table.addCell("List placed directly into cell");
+//            table.addCell(cell);
+
+
+
+//            doc.add(zone_text_pdf);
+//            doc.add(soil_text_pdf);
+//            doc.add(storeys_text_pdf);
+//            doc.add(spectral_shape_pdf);
+//            doc.add(imp_text_pdf);
+//            doc.add(fsi_text_pdf);
 
             doc.close();
             mFilePath.close();
