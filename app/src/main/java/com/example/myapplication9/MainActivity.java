@@ -2,10 +2,16 @@ package com.example.myapplication9;
 
 import static android.content.ContentValues.TAG;
 
+import static androidx.core.content.PackageManagerCompat.LOG_TAG;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
@@ -19,11 +25,15 @@ import android.widget.Toast;
 import android.widget.EditText;
 
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedHashSet;
-import java.util.List;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,9 +44,18 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.List;
+
 
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -47,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
 
     double z_val, soil_val, spectral_val, fsi_val, imp_val;
     Integer stories_val;
+
+    List checkbox_data = new List();
 
     boolean isAllFieldsChecked = false;
 
@@ -60,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
     boolean[] selectedCol;
     ArrayList<Integer> col_list = new ArrayList<>();
     ArrayList<String> col_data = new ArrayList<>();
+//    List col_pdf = new List();
     String[] col_array = {"Liquefaction", "Rockfall", "Fire", "Landslide"};
 
 
@@ -83,6 +105,9 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> imp_data = new ArrayList<>();
     String[] imp_array = {"Residence", "Office", "Commercial"};
     int i_ans = -1;
+
+    private static final int STORAGE_CODE = 1000;
+
 
 
 
@@ -127,6 +152,9 @@ public class MainActivity extends AppCompatActivity {
                         for (int r = 0; r < col_list.size(); r++) {
                             col_data.add(col_array[col_list.get(r)]);
                         }
+//                        for (int k = 0; k < col_list.size(); k++) {
+//                            col_pdf.add(col_array[col_list.get(k)]);
+//                        }
                         for (int j = 0; j < col_list.size(); j++) {
                             stringBuilder.append(col_array[col_list.get(j)]);
                             if (j != col_list.size() - 1) {
@@ -394,126 +422,246 @@ public class MainActivity extends AppCompatActivity {
 //                                Toast.makeText(MainActivity.this,"Selected Option: No",Toast.LENGTH_SHORT).show();
                                 }
                             });
-                    if (ch14.isChecked())
+
+
+                    if (ch14.isChecked()) {
                         lossSite1 = 5;
-                    if (ch15.isChecked())
+                        checkbox_data.add(ch14.getText().toString());
+                    }
+                    if (ch15.isChecked()) {
                         lossSoil1 = 2;
-                    if (ch16.isChecked())
+                        checkbox_data.add(ch15.getText().toString());
+                    }
+                    if (ch16.isChecked()) {
                         lossSoil2 = 2;
-                    if (ch17.isChecked())
+                        checkbox_data.add(ch16.getText().toString());
+                    }
+                    if (ch17.isChecked()) {
                         suit_soil1 = 1;
-                    if (ch18.isChecked())
+                        checkbox_data.add(ch17.getText().toString());
+                    }
+                    if (ch18.isChecked()) {
                         suit_soil2 = 2;
-                    if (ch19.isChecked())
+                        checkbox_data.add(ch18.getText().toString());
+                    }
+                    if (ch19.isChecked()) {
                         found1 = 3;
-                    if (ch20.isChecked())
+                        checkbox_data.add(ch19.getText().toString());
+                    }
+                    if (ch20.isChecked()) {
                         found2 = 1;
-                    if (ch21.isChecked())
+                        checkbox_data.add(ch20.getText().toString());
+                    }
+                    if (ch21.isChecked()) {
                         found3 = 3;
-                    if (ch22.isChecked())
+                        checkbox_data.add(ch21.getText().toString());
+                    }
+                    if (ch22.isChecked()) {
                         found4 = 1;
-                    if (ch23.isChecked())
+                        checkbox_data.add(ch22.getText().toString());
+                    }
+                    if (ch23.isChecked()) {
                         found5 = 2;
-                    if (ch24.isChecked())
+                        checkbox_data.add(ch23.getText().toString());
+                    }
+                    if (ch24.isChecked()) {
                         plan1 = 5;
-                    if (ch25.isChecked())
+                        checkbox_data.add(ch24.getText().toString());
+                    }
+                    if (ch25.isChecked()) {
                         plan2 = 3;
-                    if (ch26.isChecked())
+                        checkbox_data.add(ch25.getText().toString());
+                    }
+                    if (ch26.isChecked()) {
                         plan3 = 5;
-                    if (ch27.isChecked())
+                        checkbox_data.add(ch26.getText().toString());
+                    }
+                    if (ch27.isChecked()) {
 //            Waiting for more info, from bharat
                         elev1 = 0;
-                    if (ch28.isChecked())
+                        checkbox_data.add(ch27.getText().toString());
+                    }
+                    if (ch28.isChecked()) {
                         elev2 = 5;
-                    if (ch29.isChecked())
+                        checkbox_data.add(ch28.getText().toString());
+                    }
+                    if (ch29.isChecked()) {
                         elev3 = 3;
-                    if (ch30.isChecked())
+                        checkbox_data.add(ch29.getText().toString());
+                    }
+                    if (ch30.isChecked()) {
                         elev4 = 5;
-                    if (ch31.isChecked())
+                        checkbox_data.add(ch30.getText().toString());
+                    }
+                    if (ch31.isChecked()) {
                         elev5 = 5;
-                    if (ch32.isChecked())
+                        checkbox_data.add(ch31.getText().toString());
+                    }
+                    if (ch32.isChecked()) {
                         elev6 = 5;
-                    if (ch33.isChecked())
+                        checkbox_data.add(ch32.getText().toString());
+                    }
+                    if (ch33.isChecked()) {
                         elev7 = 5;
-                    if (ch34.isChecked())
+                        checkbox_data.add(ch33.getText().toString());
+                    }
+                    if (ch34.isChecked()) {
                         elev8 = 40;
-                    if (ch35.isChecked())
+                        checkbox_data.add(ch34.getText().toString());
+                    }
+                    if (ch35.isChecked()) {
                         door1 = 1;
-                    if (ch36.isChecked())
+                        checkbox_data.add(ch35.getText().toString());
+                    }
+                    if (ch36.isChecked()) {
                         door2 = 2;
-                    if (ch37.isChecked())
+                        checkbox_data.add(ch36.getText().toString());
+                    }
+                    if (ch37.isChecked()) {
                         door3 = 4;
-                    if (ch38.isChecked())
+                        checkbox_data.add(ch37.getText().toString());
+                    }
+                    if (ch38.isChecked()) {
                         door4 = 4;
-                    if (ch39.isChecked())
+                        checkbox_data.add(ch38.getText().toString());
+                    }
+                    if (ch39.isChecked()) {
                         door5 = 6;
-                    if (ch40.isChecked())
+                        checkbox_data.add(ch39.getText().toString());
+                    }
+                    if (ch40.isChecked()) {
                         distance1 = 3;
-                    if (ch41.isChecked())
+                        checkbox_data.add(ch40.getText().toString());
+                    }
+                    if (ch41.isChecked()) {
                         distance2 = 3;
-                    if (ch42.isChecked())
+                        checkbox_data.add(ch41.getText().toString());
+                    }
+                    if (ch42.isChecked()) {
                         parapets1 = 4;
-                    if (ch43.isChecked())
+                        checkbox_data.add(ch42.getText().toString());
+                    }
+                    if (ch43.isChecked()) {
 //            Waiting for more info, from Bharat
                         parapets2 = 0;
-                    if (ch44.isChecked())
+                        checkbox_data.add(ch43.getText().toString());
+                    }
+                    if (ch44.isChecked()) {
                         staircases1 = 1;
-                    if (ch45.isChecked())
+                        checkbox_data.add(ch44.getText().toString());
+                    }
+                    if (ch45.isChecked()) {
                         staircases2 = 1;
-                    if (ch46.isChecked())
+                        checkbox_data.add(ch45.getText().toString());
+                    }
+                    if (ch46.isChecked()) {
                         staircases3 = 1;
-                    if (ch47.isChecked())
+                        checkbox_data.add(ch46.getText().toString());
+                    }
+                    if (ch47.isChecked()) {
                         frame1 = 5;
-                    if (ch48.isChecked())
+                        checkbox_data.add(ch47.getText().toString());
+                    }
+                    if (ch48.isChecked()) {
                         frame2 = 10;
-                    if (ch49.isChecked())
+                        checkbox_data.add(ch48.getText().toString());
+                    }
+                    if (ch49.isChecked()) {
                         frame3 = 5;
-                    if (ch50.isChecked())
+                        checkbox_data.add(ch49.getText().toString());
+                    }
+                    if (ch50.isChecked()) {
                         frame4 = 10;
-                    if (ch51.isChecked())
+                        checkbox_data.add(ch50.getText().toString());
+                    }
+                    if (ch51.isChecked()) {
                         frame5 = 5;
-                    if (ch52.isChecked())
+                        checkbox_data.add(ch51.getText().toString());
+                    }
+                    if (ch52.isChecked()) {
                         frame6 = 10;
-                    if (ch53.isChecked())
+                        checkbox_data.add(ch52.getText().toString());
+                    }
+                    if (ch53.isChecked()) {
                         roof1 = 10;
-                    if (ch54.isChecked())
+                        checkbox_data.add(ch53.getText().toString());
+                    }
+                    if (ch54.isChecked()) {
                         roof2 = 5;
-                    if (ch55.isChecked())
+                        checkbox_data.add(ch54.getText().toString());
+                    }
+                    if (ch55.isChecked()) {
                         roof3 = 10;
-                    if (ch56.isChecked())
+                        checkbox_data.add(ch55.getText().toString());
+                    }
+                    if (ch56.isChecked()) {
                         roof4 = 10;
-                    if (ch57.isChecked())
+                        checkbox_data.add(ch56.getText().toString());
+                    }
+                    if (ch57.isChecked()) {
                         roof_column1 = 10;
-                    if (ch58.isChecked())
+                        checkbox_data.add(ch57.getText().toString());
+                    }
+                    if (ch58.isChecked()) {
                         member1 = 20;
-                    if (ch59.isChecked())
+                        checkbox_data.add(ch58.getText().toString());
+                    }
+                    if (ch59.isChecked()) {
                         column1 = 5;
-                    if (ch60.isChecked())
+                        checkbox_data.add(ch59.getText().toString());
+                    }
+                    if (ch60.isChecked()) {
                         column2 = 15;
-                    if (ch61.isChecked())
+                        checkbox_data.add(ch60.getText().toString());
+                    }
+                    if (ch61.isChecked()) {
                         struc_staircase1 = 5;
-                    if (ch62.isChecked())
+                        checkbox_data.add(ch61.getText().toString());
+                    }
+                    if (ch62.isChecked()) {
                         struc_staircase2 = 5;
-                    if (ch63.isChecked())
+                        checkbox_data.add(ch62.getText().toString());
+                    }
+                    if (ch63.isChecked()) {
                         struc_staircase3 = 10;
-                    if (ch64.isChecked())
+                        checkbox_data.add(ch63.getText().toString());
+                    }
+                    if (ch64.isChecked()) {
                         tank1 = 4;
-                    if (ch65.isChecked())
+                        checkbox_data.add(ch64.getText().toString());
+                    }
+                    if (ch65.isChecked()) {
                         materials1 = 10;
-                    if (ch66.isChecked())
+                        checkbox_data.add(ch65.getText().toString());
+                    }
+                    if (ch66.isChecked()) {
                         materials2 = 5;
-                    if (ch67.isChecked())
+                        checkbox_data.add(ch66.getText().toString());
+                    }
+                    if (ch67.isChecked()) {
                         materials3 = 10;
-                    if (ch68.isChecked())
+                        checkbox_data.add(ch67.getText().toString());
+                    }
+                    if (ch68.isChecked()) {
                         materials4 = 5;
-                    if (ch69.isChecked())
+                        checkbox_data.add(ch68.getText().toString());
+                    }
+                    if (ch69.isChecked()) {
                         workmanship1 = 3;
-                    if (ch70.isChecked())
+                        checkbox_data.add(ch69.getText().toString());
+                    }
+                    if (ch70.isChecked()) {
                         workmanship2 = 10;
-                    if (ch71.isChecked())
+                        checkbox_data.add(ch70.getText().toString());
+                    }
+                    if (ch71.isChecked()) {
                         concrete1 = 4;
-                    if (ch72.isChecked())
+                        checkbox_data.add(ch71.getText().toString());
+                    }
+                    if (ch72.isChecked()) {
                         concrete2 = 4;
+                        checkbox_data.add(ch72.getText().toString());
+                    }
 
 //                if(ch1.isChecked() || ch2.isChecked() || ch3.isChecked() || ch4.isChecked() || ch5.isChecked() || ch6.isChecked() || ch7.isChecked() || ch8.isChecked() || ch9.isChecked() || ch10.isChecked() || ch11.isChecked() || ch12.isChecked() || ch13.isChecked()) {
 //                    AlertDialog dialog = builder.create();
@@ -604,11 +752,25 @@ public class MainActivity extends AppCompatActivity {
                         if (ch1.isChecked() || ch2.isChecked() || ch3.isChecked() || ch4.isChecked() || ch5.isChecked() || ch6.isChecked() || ch7.isChecked() || ch8.isChecked() || ch9.isChecked() || ch10.isChecked() || ch11.isChecked() || ch12.isChecked() || ch13.isChecked()) {
                             AlertDialog dialog = builder.create();
                             dialog.show();
-                        } else {
-                            Toast.makeText(getApplicationContext(), hazard_string, Toast.LENGTH_SHORT).show();
-                            Toast.makeText(getApplicationContext(), exposure_string, Toast.LENGTH_SHORT).show();
-                            Toast.makeText(getApplicationContext(), vulner_string, Toast.LENGTH_SHORT).show();
                         }
+                        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
+                            //system OS >= Marshmallow(6.0), check if permission is enabled or not
+                            if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
+                                    PackageManager.PERMISSION_DENIED){
+                                //permission was not granted, request it
+                                String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
+                                requestPermissions(permissions, STORAGE_CODE);
+                            }
+                            else {
+                                //permission already granted, call save pdf method
+                                savePdf();
+                            }
+                        }
+                        else {
+                            //system OS < Marshmallow, call save pdf method
+                            savePdf();
+                        }
+
                     }else{
                         Toast.makeText(getApplicationContext(), "Please make sure to fill all the required fields.", Toast.LENGTH_SHORT).show();
                         scrollview.smoothScrollTo(0,0);
@@ -671,7 +833,91 @@ public class MainActivity extends AppCompatActivity {
         }else{
             return true;
         }
-    }}
+    }
+    private void savePdf() throws FileNotFoundException {
+
+        File pdfFolder = new File(Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_DOCUMENTS), "pdfdemo");
+
+        if (!pdfFolder.exists()) {
+            pdfFolder.mkdir();
+            Log.i(TAG, "Pdf Directory created");
+        }
+
+        Document doc = new Document();
+        String mFilename = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(System.currentTimeMillis());
+//        String mFilePath = Environment.getExternalStorageDirectory() + "/" + mFilename + ".pdf";
+        File myFile = new File(pdfFolder + mFilename + ".pdf");
+        OutputStream mFilePath = new FileOutputStream(myFile);
+
+        try{
+            PdfWriter.getInstance(doc, mFilePath);
+            doc.open();
+
+//            para.getAccessibilityProperties().setRole(StandardRoles.H1);(
+
+            Paragraph intro = new Paragraph("EDRI - Calulcator has generated a pdf which contains all the required data and calculations to understand the safety of the structure, please read the pdf thoroughly to understand which features add risk to the structures.");
+            Paragraph col_haz = new Paragraph("\nCollateral Hazard:");
+            Paragraph zone_text_pdf = new Paragraph("\nSeismic Zone: "+zone_array[z_ans]);
+            Paragraph soil_text_pdf = new Paragraph("\nSoil Type:" +soil_array[s_ans]);
+            Paragraph storeys_text_pdf = new Paragraph("\nNumber of Storeys:"+stories_text.getText().toString());
+            Paragraph spectral_shape_pdf = new Paragraph("\nSpectral_Shape:"+spectre_text.getText().toString());
+            Paragraph imp_text_pdf = new Paragraph("\nImportance of the Structure:"+imp_array[i_ans]);
+            Paragraph fsi_text_pdf = new Paragraph("\nFSI of the Structure:"+fsi_text.getText().toString());
+
+
+
+            Paragraph col_haz_empty = new Paragraph("There are no Collateral Hazards");
+
+//            for(int i = 0; i<col_data.size(); i++){
+////                List col_pdf = new List();
+//                col_pdf.add(col_data.get(i));
+//            }
+
+            doc.addAuthor("EDRI-Calculator");
+            doc.addTitle("EDRI - Generated PDF");
+
+            doc.add(new Paragraph("EDRI - Calculator", FontFactory.getFont(FontFactory.HELVETICA
+                    ,30, Font.BOLD, BaseColor.BLACK)));
+
+
+            doc.add(intro);
+            doc.add(col_haz);
+
+
+            if (col_data.isEmpty()){
+                doc.add(col_haz_empty);
+            }else {
+                List samp = new List();
+                for(int j = 0; j<col_data.size();j++){
+                    samp.add(col_data.get(j));
+                }
+//                col_pdf.clear();
+                doc.add(samp);
+
+//                col_pdf.clear();
+//                List col_pdf = new List();
+//                col_pdf = col_data.;
+            }
+            doc.add(zone_text_pdf);
+            doc.add(soil_text_pdf);
+            doc.add(storeys_text_pdf);
+            doc.add(spectral_shape_pdf);
+            doc.add(imp_text_pdf);
+            doc.add(fsi_text_pdf);
+
+            doc.close();
+            mFilePath.close();
+            Toast.makeText(this, mFilename +".pdf\nis saved to\n"+ mFilePath, Toast.LENGTH_SHORT).show();
+//            doc.addHeader("EDRI - Generated Data",)
+        }catch (Exception e){
+            //if any thing goes wrong causing exception, get and show exception message
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+}
 //        return true;
 
 
