@@ -35,16 +35,21 @@ import java.util.Collections;
 import java.util.HashSet;
 
 import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
+import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.memorynotfound.pdf.itext.WatermarkPageEvent;
 
 
 import java.util.List;
@@ -59,6 +64,9 @@ public class MainActivity extends AppCompatActivity {
     Integer stories_val;
 
     ArrayList<String> checkbox_data = new ArrayList<>();
+    ArrayList<String> life_checkbox_data = new ArrayList<>();
+    double risk_val;
+    String risk_percentage;
 
     boolean isAllFieldsChecked = false;
 
@@ -719,21 +727,19 @@ public class MainActivity extends AppCompatActivity {
                         Double hazard_val = spectral_val * soil_val * z_val;
                         Double exposure_val = imp_val * fsi_val;
 
-                        Double risk_val = economic_loss * hazard_val * exposure_val;
-
-                        String hazard_string = String.format("Hazard Value is: %f", hazard_val);
-                        String exposure_string = String.format("Exposure Value is: %f", exposure_val);
-                        String vulner_string = String.format("Economic Loss Inducing Factors Value is: %f", economic_loss);
-
-                        String risk_string = String.format("Risk Value is: %f",risk_val);
+//                        String hazard_string = String.format("Hazard Value is: %f", hazard_val);
+//                        String exposure_string = String.format("Exposure Value is: %f", exposure_val);
+//                        String vulner_string = String.format("Economic Loss Inducing Factors Value is: %f", economic_loss);
+//
+//                        String risk_string = String.format("Risk Value is: %f",risk_val);
 
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
                         builder.setTitle("Building Safety Alert")
-                                .setIcon(android.R.drawable.ic_dialog_alert)
-                                .setMessage("This building's safety is compromised because of it's life threatening factors, please contact the needed authorities.\n\nAlthough the Values of various factors are as follows:\n\n" + hazard_string + "\n" + exposure_string + "\n" + vulner_string + "\n")
-                                .setMessage("This building's safety is compromised because of it's life threatening factors, please contact the needed authorities.\n\nAlthough the Values of various factors are as follows:\n\n" + hazard_string + "\n" + exposure_string + "\n" + vulner_string + "\n"+ "Risk Value is: 100%" + "\n")
+                                .setIcon(R.drawable.asd)
+                                .setMessage("This building's safety is compromised because of it's life threatening factors, please contact the needed authorities.\n\nThough you results are available below.")
+//                                .setMessage("This building's safety is compromised because of it's life threatening factors, please contact the needed authorities.\n\nAlthough the Values of various factors are as follows:\n\n" + hazard_string + "\n" + exposure_string + "\n" + vulner_string + "\n"+ "Risk Value is: 100%" + "\n")
                                 .setCancelable(false)
 
                                 .setNegativeButton("OK", new DialogInterface.OnClickListener() {
@@ -741,6 +747,55 @@ public class MainActivity extends AppCompatActivity {
                                     public void onClick(DialogInterface dialog, int which) {
                                     }
                                 });
+
+
+                        if (ch1.isChecked()){
+                            life_checkbox_data.add(ch1.getText().toString());
+                        }
+                        if (ch2.isChecked()){
+                            life_checkbox_data.add(ch2.getText().toString());
+                        }
+                        if (ch3.isChecked()){
+                            life_checkbox_data.add(ch3.getText().toString());
+                        }
+                        if (ch4.isChecked()){
+                            life_checkbox_data.add(ch4.getText().toString());
+                        }
+                        if (ch5.isChecked()){
+                            life_checkbox_data.add(ch5.getText().toString());
+                        }
+                        if (ch6.isChecked()){
+                            life_checkbox_data.add(ch6.getText().toString());
+                        }
+                        if (ch7.isChecked()){
+                            life_checkbox_data.add(ch7.getText().toString());
+                        }if (ch8.isChecked()){
+                            life_checkbox_data.add(ch8.getText().toString());
+                        }
+                        if (ch9.isChecked()){
+                            life_checkbox_data.add(ch9.getText().toString());
+                        }
+                        if (ch10.isChecked()){
+                            life_checkbox_data.add(ch10.getText().toString());
+                        }
+                        if (ch11.isChecked()){
+                            life_checkbox_data.add(ch11.getText().toString());
+                        }
+                        if (ch12.isChecked()){
+                            life_checkbox_data.add(ch12.getText().toString());
+                        }
+                        if (ch13.isChecked()){
+                            life_checkbox_data.add(ch13.getText().toString());
+                        }
+
+                        risk_val = economic_loss * hazard_val * exposure_val;
+                        if (life_checkbox_data.isEmpty()){
+                            Double risk_percentage_val = risk_val * 100/1;
+                            risk_percentage = String.valueOf(risk_percentage_val + "%");
+                        }else{
+                            risk_percentage = "100%";
+                        }
+
 
                         if (ch1.isChecked() || ch2.isChecked() || ch3.isChecked() || ch4.isChecked() || ch5.isChecked() || ch6.isChecked() || ch7.isChecked() || ch8.isChecked() || ch9.isChecked() || ch10.isChecked() || ch11.isChecked() || ch12.isChecked() || ch13.isChecked()) {
                             AlertDialog dialog = builder.create();
@@ -827,7 +882,7 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
     }
-    private void savePdf() throws FileNotFoundException {
+    private void savePdf() throws FileNotFoundException, DocumentException {
 
         File pdfFolder = new File(Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_DOCUMENTS), "pdfdemo");
@@ -837,19 +892,33 @@ public class MainActivity extends AppCompatActivity {
             Log.i(TAG, "Pdf Directory created");
         }
 
+
+
         Document doc = new Document();
         String mFilename = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(System.currentTimeMillis());
 //        String mFilePath = Environment.getExternalStorageDirectory() + "/" + mFilename + ".pdf";
         File myFile = new File(pdfFolder + mFilename + ".pdf");
         OutputStream mFilePath = new FileOutputStream(myFile);
+//        HeaderFooterPageEvent event = new HeaderFooterPageEvent();
+//        pdfWriter.setPageEvent(event);
+
 
         try{
-            PdfWriter.getInstance(doc, mFilePath);
+            PdfWriter writer = PdfWriter.getInstance(doc, mFilePath);
+            Rectangle rect = new Rectangle(30, 30, 550, 800);
+            writer.setBoxSize("art", rect);
+            HeaderFooterPageEvent event = new HeaderFooterPageEvent();
+            writer.setPageEvent(event);
+            writer.setPageEvent(new WatermarkPageEvent());
+//            PdfWriter.getInstance(doc, mFilePath);
+//            HeaderFooterPageEvent event = new HeaderFooterPageEvent();
+//            pdfWriter.setPageEvent(event);
             doc.open();
+
 
 //            para.getAccessibilityProperties().setRole(StandardRoles.H1);(
 
-            Paragraph intro = new Paragraph("\nEDRI - Calculator has generated a pdf which contains all the required data and calculations to understand the safety of the structure, please read the pdf thoroughly to understand which features add risk to the structures.\n");
+            Paragraph intro = new Paragraph("\nEDRI - Calculator has generated a pdf which contains all the required data and calculations to understand the safety of the structure, please read the pdf thoroughly to understand which features add risk to the structures.\n\n");
 
 //            Paragraph col_haz_empty = new Paragraph("There are no Collateral Hazards");
 
@@ -861,42 +930,29 @@ public class MainActivity extends AppCompatActivity {
             doc.addAuthor("EDRI-Calculator");
             doc.addTitle("EDRI - Generated PDF");
 
-            doc.add(new Paragraph("EDRI - Calculator\n", FontFactory.getFont(FontFactory.HELVETICA
-                    ,30, Font.BOLD, BaseColor.BLACK)));
-
             Drawable d = getResources().getDrawable(R.drawable.hdpi);
             BitmapDrawable bitDw = ((BitmapDrawable) d);
             Bitmap bmp = bitDw.getBitmap();
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
             Image image = Image.getInstance(stream.toByteArray());
-            image.setAlignment(Element.ALIGN_LEFT);
-            image.scaleAbsolute(50, 50);
+
+//            image.setAlignment(Element.ALIGN_RIGHT);
+            image.scaleAbsolute(90, 90);
 
 
-            doc.add(image);
-//            image1.setAlignment(Element.ALIGN_LEFT);
-//            image1.scaleAbsolute(450, 250);
+
+
+            Paragraph intro_image = new Paragraph();
+            intro_image.add(new Chunk("EDRI - Calculator\n", FontFactory.getFont(FontFactory.HELVETICA,30, Font.BOLD, BaseColor.BLACK)));
+
+            doc.add(intro_image);
 
 
             doc.add(intro);
             doc.add(new Paragraph("\n"));
-//            doc.add(col_haz);
-//            PdfPTable header_row = new PdfPTable(1);
-//            header_row.setKeepTogether(true);
-//            header_row.addCell(col_haz);
-//
-//            PdfPTable body_haz_row = new PdfPTable(2);
-//            body_haz_row.setKeepTogether(true);
 
 
-//            c1.getHorizontalAlignment(align)
-
-//            if (col_data.isEmpty()){
-//                body_haz_row.addCell(col_haz_empty);
-////                doc.add(col_haz_empty);
-//            }else {
-//                List samp = new List();
             ArrayList l = new ArrayList();
 
             for(int j = 0; j<col_data.size();j++){
@@ -1129,57 +1185,90 @@ public class MainActivity extends AppCompatActivity {
             doc.add(eco_phraseTableWrapper);
             doc.add(new Paragraph("\n"));
 
-
             PdfPCell eco_cell = new PdfPCell();
             eco_cell.addElement(economic_table_list_array);
 
             PdfPTable eco_table = new PdfPTable(2);
             eco_table.setSpacingBefore(5);
             eco_table.addCell("List placed directly into cell");
-            eco_table.addCell(cell);
+            eco_table.addCell(eco_cell);
 
 
-//            Phrase eco_phrase = new Phrase();
-//            phrase.add(economic_table_list_array);
-//            PdfPCell eco_phraseCell = new PdfPCell();
-//            eco_phraseCell.addElement(eco_phrase);
-//
-//            PdfPTable eco_phraseTable = new PdfPTable(2);
-//            eco_phraseTable.setSpacingBefore(5);
-//            eco_phraseTable.addCell("Collateral Damage: ");
-//            eco_phraseTable.addCell(eco_phraseCell);
-//
-//            Phrase eco_phraseTableWrapper = new Phrase();
-//            eco_phraseTableWrapper.add(eco_phraseTable);
-//            doc.add(eco_phraseTableWrapper);
-//            doc.add(new Paragraph("\n"));
-//
-//
-//            PdfPCell eco_cell = new PdfPCell();
-//            eco_cell.addElement(economic_table_list_array);
-//
-//            PdfPTable eco_table = new PdfPTable(2);
-//            table.setSpacingBefore(5);
-//            table.addCell("List placed directly into cell");
-//            table.addCell(cell);
+            Set life_set = new HashSet(life_checkbox_data);
+            List<String> life_list = new ArrayList<String>(life_set);
+            com.itextpdf.text.List life_table_list_array  = new com.itextpdf.text.List();
+            for(int sts=0;sts<life_list.size();sts++){
+//                    doc.add(new Paragraph("-> "+ll.get(i)));
+                life_table_list_array.add(life_list.get(sts)+"\n\n");
+            }
+
+            Phrase life_phrase = new Phrase();
+            life_phrase.add(life_table_list_array);
+            PdfPCell life_phraseCell = new PdfPCell();
+            life_phraseCell.addElement(life_phrase);
+
+            PdfPTable life_phraseTable = new PdfPTable(2);
+            life_phraseTable.setSpacingBefore(5);
+            life_phraseTable.addCell("Life Threatening Factors: ");
+            life_phraseTable.addCell(life_phraseCell);
+
+            Phrase life_phraseTableWrapper = new Phrase();
+            life_phraseTableWrapper.add(life_phraseTable);
+            doc.add(life_phraseTableWrapper);
+            doc.add(new Paragraph("\n"));
+
+            PdfPCell life_cell = new PdfPCell();
+            life_cell.addElement(life_table_list_array);
+
+            PdfPTable life_table = new PdfPTable(2);
+            life_table.setSpacingBefore(5);
+            life_table.addCell("List placed directly into cell");
+            life_table.addCell(life_cell);
+
+
+            com.itextpdf.text.List risk_table_list = new com.itextpdf.text.List();
+            risk_table_list.add(risk_percentage);
+            Phrase risk_phrase = new Phrase();
+            risk_phrase.add(risk_table_list);
+            PdfPCell risk_phraseCell = new PdfPCell();
+            risk_phraseCell.addElement(risk_phrase);
+
+            PdfPTable risk_phraseTable = new PdfPTable(2);
+            risk_phraseTable.setSpacingBefore(5);
+            risk_phraseTable.addCell("Earthquake Disaster Risk Value: ");
+            risk_phraseTable.addCell(risk_phraseCell);
+
+            Phrase risk_phraseTableWrapper = new Phrase();
+            risk_phraseTableWrapper.add(risk_phraseTable);
+            doc.add(risk_phraseTableWrapper);
+            doc.add(new Paragraph("\n"));
+
+            PdfPCell risk_cell = new PdfPCell();
+            risk_cell.addElement(risk_table_list);
+//            zone_cell.addElement(zone_array[z_ans]);
+
+            PdfPTable risk_table = new PdfPTable(2);
+            risk_table.setSpacingBefore(5);
+            risk_table.addCell("List placed directly into cell");
+            risk_table.addCell(risk_cell);
 
 
 
-//            doc.add(zone_text_pdf);
-//            doc.add(soil_text_pdf);
-//            doc.add(storeys_text_pdf);
-//            doc.add(spectral_shape_pdf);
-//            doc.add(imp_text_pdf);
-//            doc.add(fsi_text_pdf);
 
             doc.close();
-            mFilePath.close();
+//            mFilePath.close();
             Toast.makeText(this, mFilename +".pdf\nis saved to\n"+ mFilePath, Toast.LENGTH_SHORT).show();
+
+
 //            doc.addHeader("EDRI - Generated Data",)
         }catch (Exception e){
             //if any thing goes wrong causing exception, get and show exception message
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+//            System.out.println(e.printStackTrace());
+            e.printStackTrace();
         }
+
+
 
     }
 
