@@ -9,6 +9,7 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -34,6 +35,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 
+import com.github.mikephil.charting.animation.Easing;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.formatter.PercentFormatter;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
@@ -51,6 +60,8 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.memorynotfound.pdf.itext.WatermarkPageEvent;
 
+//import org.jfre
+
 
 import java.util.List;
 import java.util.Set;
@@ -67,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> life_checkbox_data = new ArrayList<>();
     double risk_val;
     String risk_percentage;
+
 
     boolean isAllFieldsChecked = false;
 
@@ -108,13 +120,13 @@ public class MainActivity extends AppCompatActivity {
     private static final int STORAGE_CODE = 1000;
 
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        getSupportActionBar().setTitle("EDRI - Calculator");
+
         ScrollView scrollview = findViewById(R.id.scrollview);
 
         coltextView = findViewById(R.id.ColtextView);
@@ -176,6 +188,7 @@ public class MainActivity extends AppCompatActivity {
                         for (int j = 0; j < selectedCol.length; j++) {
                             selectedCol[j] = false;
                             col_list.clear();
+                            col_data.clear();
                             coltextView.setText("");
                         }
                     }
@@ -409,16 +422,9 @@ public class MainActivity extends AppCompatActivity {
                             .setIcon(android.R.drawable.ic_dialog_alert)
                             .setCancelable(false)
                             .setMessage("Make sure to Fill all the required Fields.")
-//                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                Toast.makeText(MainActivity.this,"Selected Option: YES",Toast.LENGTH_SHORT).show();
-//                            }
-//                        })
                             .setNegativeButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-//                                Toast.makeText(MainActivity.this,"Selected Option: No",Toast.LENGTH_SHORT).show();
                                 }
                             });
 
@@ -727,18 +733,11 @@ public class MainActivity extends AppCompatActivity {
                         Double hazard_val = spectral_val * soil_val * z_val;
                         Double exposure_val = imp_val * fsi_val;
 
-//                        String hazard_string = String.format("Hazard Value is: %f", hazard_val);
-//                        String exposure_string = String.format("Exposure Value is: %f", exposure_val);
-//                        String vulner_string = String.format("Economic Loss Inducing Factors Value is: %f", economic_loss);
-//
-//                        String risk_string = String.format("Risk Value is: %f",risk_val);
-
-
                         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
                         builder.setTitle("Building Safety Alert")
                                 .setIcon(R.drawable.asd)
-                                .setMessage("This building's safety is compromised because of it's life threatening factors, please contact the needed authorities.\n\nThough you results are available below.")
+                                .setMessage("This building's safety is compromised because of it's life threatening factors or Collateral Hazards, please contact the needed authorities.\n\nThough you results are still available below.")
 //                                .setMessage("This building's safety is compromised because of it's life threatening factors, please contact the needed authorities.\n\nAlthough the Values of various factors are as follows:\n\n" + hazard_string + "\n" + exposure_string + "\n" + vulner_string + "\n"+ "Risk Value is: 100%" + "\n")
                                 .setCancelable(false)
 
@@ -788,8 +787,10 @@ public class MainActivity extends AppCompatActivity {
                             life_checkbox_data.add(ch13.getText().toString());
                         }
 
+
+
                         risk_val = economic_loss * hazard_val * exposure_val;
-                        if (life_checkbox_data.isEmpty()){
+                        if (life_checkbox_data.isEmpty() || !col_data.isEmpty()){
                             Double risk_percentage_val = risk_val * 100/1;
                             risk_percentage = String.valueOf(risk_percentage_val + "%");
                         }else{
@@ -797,25 +798,21 @@ public class MainActivity extends AppCompatActivity {
                         }
 
 
-                        if (ch1.isChecked() || ch2.isChecked() || ch3.isChecked() || ch4.isChecked() || ch5.isChecked() || ch6.isChecked() || ch7.isChecked() || ch8.isChecked() || ch9.isChecked() || ch10.isChecked() || ch11.isChecked() || ch12.isChecked() || ch13.isChecked()) {
+                        if (ch1.isChecked() || ch2.isChecked() || ch3.isChecked() || ch4.isChecked() || ch5.isChecked() || ch6.isChecked() || ch7.isChecked() || ch8.isChecked() || ch9.isChecked() || ch10.isChecked() || ch11.isChecked() || ch12.isChecked() || ch13.isChecked() || !col_data.isEmpty()) {
                             AlertDialog dialog = builder.create();
                             dialog.show();
                         }
                         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
-                            //system OS >= Marshmallow(6.0), check if permission is enabled or not
                             if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
                                     PackageManager.PERMISSION_DENIED){
-                                //permission was not granted, request it
                                 String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
                                 requestPermissions(permissions, STORAGE_CODE);
                             }
                             else {
-                                //permission already granted, call save pdf method
                                 savePdf();
                             }
                         }
                         else {
-                            //system OS < Marshmallow, call save pdf method
                             savePdf();
                         }
 
@@ -882,6 +879,8 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
     }
+
+
     private void savePdf() throws FileNotFoundException, DocumentException {
 
         File pdfFolder = new File(Environment.getExternalStoragePublicDirectory(
@@ -896,11 +895,9 @@ public class MainActivity extends AppCompatActivity {
 
         Document doc = new Document();
         String mFilename = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(System.currentTimeMillis());
-//        String mFilePath = Environment.getExternalStorageDirectory() + "/" + mFilename + ".pdf";
         File myFile = new File(pdfFolder + mFilename + ".pdf");
         OutputStream mFilePath = new FileOutputStream(myFile);
-//        HeaderFooterPageEvent event = new HeaderFooterPageEvent();
-//        pdfWriter.setPageEvent(event);
+
 
 
         try{
@@ -910,22 +907,10 @@ public class MainActivity extends AppCompatActivity {
             HeaderFooterPageEvent event = new HeaderFooterPageEvent();
             writer.setPageEvent(event);
             writer.setPageEvent(new WatermarkPageEvent());
-//            PdfWriter.getInstance(doc, mFilePath);
-//            HeaderFooterPageEvent event = new HeaderFooterPageEvent();
-//            pdfWriter.setPageEvent(event);
+
             doc.open();
 
-
-//            para.getAccessibilityProperties().setRole(StandardRoles.H1);(
-
             Paragraph intro = new Paragraph("\nEDRI - Calculator has generated a pdf which contains all the required data and calculations to understand the safety of the structure, please read the pdf thoroughly to understand which features add risk to the structures.\n\n");
-
-//            Paragraph col_haz_empty = new Paragraph("There are no Collateral Hazards");
-
-//            for(int i = 0; i<col_data.size(); i++){
-////                List col_pdf = new List();
-//                col_pdf.add(col_data.get(i));
-//            }
 
             doc.addAuthor("EDRI-Calculator");
             doc.addTitle("EDRI - Generated PDF");
@@ -936,12 +921,7 @@ public class MainActivity extends AppCompatActivity {
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
             Image image = Image.getInstance(stream.toByteArray());
-
-//            image.setAlignment(Element.ALIGN_RIGHT);
             image.scaleAbsolute(90, 90);
-
-
-
 
             Paragraph intro_image = new Paragraph();
             intro_image.add(new Chunk("EDRI - Calculator\n", FontFactory.getFont(FontFactory.HELVETICA,30, Font.BOLD, BaseColor.BLACK)));
@@ -1253,18 +1233,12 @@ public class MainActivity extends AppCompatActivity {
             risk_table.addCell(risk_cell);
 
 
-
-
             doc.close();
-//            mFilePath.close();
             Toast.makeText(this, mFilename +".pdf\nis saved to\n"+ mFilePath, Toast.LENGTH_SHORT).show();
 
 
-//            doc.addHeader("EDRI - Generated Data",)
         }catch (Exception e){
-            //if any thing goes wrong causing exception, get and show exception message
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
-//            System.out.println(e.printStackTrace());
             e.printStackTrace();
         }
 
@@ -1273,6 +1247,5 @@ public class MainActivity extends AppCompatActivity {
     }
 
 }
-//        return true;
 
 
