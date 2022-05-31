@@ -4,14 +4,18 @@ import static android.content.ContentValues.TAG;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
 import android.Manifest;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.util.Log;
@@ -64,6 +68,7 @@ import com.memorynotfound.pdf.itext.WatermarkPageEvent;
 
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 
@@ -78,6 +83,12 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> life_checkbox_data = new ArrayList<>();
     double risk_val;
     String risk_percentage;
+
+    File myFile;
+    File pdfFolder;
+    String mFilename;
+
+    Button view_file;
 
 
     boolean isAllFieldsChecked = false;
@@ -126,6 +137,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         getSupportActionBar().setTitle("EDRI - Calculator");
+        view_file = findViewById(R.id.viewfile_btn);
+        view_file.setVisibility(View.GONE);
+
 
         ScrollView scrollview = findViewById(R.id.scrollview);
 
@@ -716,6 +730,78 @@ public class MainActivity extends AppCompatActivity {
                         }
 
 
+//                        String spec_text = spectre_text.getText().toString();
+//                        spectral_val = Double.parseDouble(spec_text);
+//
+//                        String fsi = fsi_text.getText().toString();
+//                        fsi_val = Double.parseDouble(fsi);
+//
+//                        String stories = stories_text.getText().toString();
+//                        stories_val = Integer.parseInt(stories);
+//
+//                        spectral_val = Math.min((20 / stories_val), 2.5);
+//
+//                        Integer economic_loss_sum = lossSite1 + lossSoil1 + lossSoil2 + suit_soil1 + suit_soil2 + found1 + found2 + found3 + found4 + found5 + plan1 + plan2 + plan3 + elev1 + elev2 + elev3 + elev4 + elev5 + elev6 + elev7 + elev8 + door1 + door2 + door3 + door4 + door5 + distance1 + distance2 + parapets1 + parapets2 + staircases1 + staircases2 + staircases3 + frame1 + frame2 + frame3 + frame4 + frame5 + frame6 + roof1 + roof2 + roof3 + roof4 + roof_column1 + member1 + column1 + column2 + struc_staircase1 + struc_staircase2 + struc_staircase3 + tank1 + materials1 + materials2 + materials3 + materials4 + workmanship1 + workmanship2 + concrete1 + concrete2;
+//
+//                        economic_loss = economic_loss_sum / 100.0;
+//                        Double hazard_val = spectral_val * soil_val * z_val;
+//                        Double exposure_val = imp_val * fsi_val;
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+
+                        builder.setTitle("Building Safety Alert")
+                                .setIcon(R.drawable.asd)
+                                .setMessage("This building's safety is compromised because of it's life threatening factors or Collateral Hazards, please contact the needed authorities.\n\nThough you results are still available below.")
+//                                .setMessage("This building's safety is compromised because of it's life threatening factors, please contact the needed authorities.\n\nAlthough the Values of various factors are as follows:\n\n" + hazard_string + "\n" + exposure_string + "\n" + vulner_string + "\n"+ "Risk Value is: 100%" + "\n")
+                                .setCancelable(false)
+
+                                .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                    }
+                                });
+
+
+                        if (ch1.isChecked()) {
+                            life_checkbox_data.add(ch1.getText().toString());
+                        }
+                        if (ch2.isChecked()) {
+                            life_checkbox_data.add(ch2.getText().toString());
+                        }
+                        if (ch3.isChecked()) {
+                            life_checkbox_data.add(ch3.getText().toString());
+                        }
+                        if (ch4.isChecked()) {
+                            life_checkbox_data.add(ch4.getText().toString());
+                        }
+                        if (ch5.isChecked()) {
+                            life_checkbox_data.add(ch5.getText().toString());
+                        }
+                        if (ch6.isChecked()) {
+                            life_checkbox_data.add(ch6.getText().toString());
+                        }
+                        if (ch7.isChecked()) {
+                            life_checkbox_data.add(ch7.getText().toString());
+                        }
+                        if (ch8.isChecked()) {
+                            life_checkbox_data.add(ch8.getText().toString());
+                        }
+                        if (ch9.isChecked()) {
+                            life_checkbox_data.add(ch9.getText().toString());
+                        }
+                        if (ch10.isChecked()) {
+                            life_checkbox_data.add(ch10.getText().toString());
+                        }
+                        if (ch11.isChecked()) {
+                            life_checkbox_data.add(ch11.getText().toString());
+                        }
+                        if (ch12.isChecked()) {
+                            life_checkbox_data.add(ch12.getText().toString());
+                        }
+                        if (ch13.isChecked()) {
+                            life_checkbox_data.add(ch13.getText().toString());
+                        }
+
                         String spec_text = spectre_text.getText().toString();
                         spectral_val = Double.parseDouble(spec_text);
 
@@ -733,92 +819,43 @@ public class MainActivity extends AppCompatActivity {
                         Double hazard_val = spectral_val * soil_val * z_val;
                         Double exposure_val = imp_val * fsi_val;
 
-                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-
-                        builder.setTitle("Building Safety Alert")
-                                .setIcon(R.drawable.asd)
-                                .setMessage("This building's safety is compromised because of it's life threatening factors or Collateral Hazards, please contact the needed authorities.\n\nThough you results are still available below.")
-//                                .setMessage("This building's safety is compromised because of it's life threatening factors, please contact the needed authorities.\n\nAlthough the Values of various factors are as follows:\n\n" + hazard_string + "\n" + exposure_string + "\n" + vulner_string + "\n"+ "Risk Value is: 100%" + "\n")
-                                .setCancelable(false)
-
-                                .setNegativeButton("OK", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                    }
-                                });
-
-
-                        if (ch1.isChecked()){
-                            life_checkbox_data.add(ch1.getText().toString());
-                        }
-                        if (ch2.isChecked()){
-                            life_checkbox_data.add(ch2.getText().toString());
-                        }
-                        if (ch3.isChecked()){
-                            life_checkbox_data.add(ch3.getText().toString());
-                        }
-                        if (ch4.isChecked()){
-                            life_checkbox_data.add(ch4.getText().toString());
-                        }
-                        if (ch5.isChecked()){
-                            life_checkbox_data.add(ch5.getText().toString());
-                        }
-                        if (ch6.isChecked()){
-                            life_checkbox_data.add(ch6.getText().toString());
-                        }
-                        if (ch7.isChecked()){
-                            life_checkbox_data.add(ch7.getText().toString());
-                        }if (ch8.isChecked()){
-                            life_checkbox_data.add(ch8.getText().toString());
-                        }
-                        if (ch9.isChecked()){
-                            life_checkbox_data.add(ch9.getText().toString());
-                        }
-                        if (ch10.isChecked()){
-                            life_checkbox_data.add(ch10.getText().toString());
-                        }
-                        if (ch11.isChecked()){
-                            life_checkbox_data.add(ch11.getText().toString());
-                        }
-                        if (ch12.isChecked()){
-                            life_checkbox_data.add(ch12.getText().toString());
-                        }
-                        if (ch13.isChecked()){
-                            life_checkbox_data.add(ch13.getText().toString());
-                        }
-
-
 
                         risk_val = economic_loss * hazard_val * exposure_val;
-                        if (life_checkbox_data.isEmpty() || !col_data.isEmpty()){
-                            Double risk_percentage_val = risk_val * 100/1;
-                            risk_percentage = String.valueOf(risk_percentage_val + "%");
-                        }else{
+                        if (!life_checkbox_data.isEmpty() || !col_data.isEmpty()) {
                             risk_percentage = "100%";
                         }
+                        else{
+
+                            risk_percentage = String.valueOf(risk_val);
+                            System.out.println(risk_percentage);
+                        }
+//                            Double risk_percentage_val = risk_val * 100 / 1;
+//                            risk_percentage = String.valueOf(risk_percentage_val + "%");
+//                        } else {
+//                            risk_percentage = "100%";
+//                        }
 
 
                         if (ch1.isChecked() || ch2.isChecked() || ch3.isChecked() || ch4.isChecked() || ch5.isChecked() || ch6.isChecked() || ch7.isChecked() || ch8.isChecked() || ch9.isChecked() || ch10.isChecked() || ch11.isChecked() || ch12.isChecked() || ch13.isChecked() || !col_data.isEmpty()) {
                             AlertDialog dialog = builder.create();
                             dialog.show();
                         }
-                        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
+                        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
                             if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
-                                    PackageManager.PERMISSION_DENIED){
+                                    PackageManager.PERMISSION_DENIED) {
                                 String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
                                 requestPermissions(permissions, STORAGE_CODE);
-                            }
-                            else {
+                            } else {
                                 savePdf();
                             }
-                        }
-                        else {
+                        } else {
                             savePdf();
+
                         }
 
-                    }else{
+                    } else {
                         Toast.makeText(getApplicationContext(), "Please make sure to fill all the required fields.", Toast.LENGTH_SHORT).show();
-                        scrollview.smoothScrollTo(0,0);
+                        scrollview.smoothScrollTo(0, 0);
 
                     }
 
@@ -826,6 +863,9 @@ public class MainActivity extends AppCompatActivity {
                     AlertDialog dialog = errbuilder.create();
                     dialog.show();
                 }
+                col_data.clear();
+                life_checkbox_data.clear();
+                checkbox_data.clear();
             }
         });
 
@@ -835,9 +875,10 @@ public class MainActivity extends AppCompatActivity {
         if (zonetextView.getText().length() == 0) {
             zonetextView.setError("This field is required");
             return false;
-        }else{
+        } else {
             return true;
-        }}
+        }
+    }
 
     private boolean CheckSoil() {
         if (soiltextView.getText().length() == 0) {
@@ -852,30 +893,34 @@ public class MainActivity extends AppCompatActivity {
         if (imptextView.getText().length() == 0) {
             imptextView.setError("This field is required");
             return false;
-        }else{
+        } else {
             return true;
-        }}
+        }
+    }
 
     private boolean CheckStories() {
         if (stories_text.length() == 0) {
             stories_text.setError("This field is required");
             return false;
-        }else{
+        } else {
             return true;
         }
     }
+
     private boolean CheckSpectre() {
         if (spectre_text.length() == 0) {
             spectre_text.setError("This field is required");
             return false;
-        }else{
+        } else {
             return true;
-        }}
+        }
+    }
+
     private boolean CheckFsi() {
         if (fsi_text.length() == 0) {
             fsi_text.setError("This field is required");
             return false;
-        }else{
+        } else {
             return true;
         }
     }
@@ -883,7 +928,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void savePdf() throws FileNotFoundException, DocumentException {
 
-        File pdfFolder = new File(Environment.getExternalStoragePublicDirectory(
+        pdfFolder = new File(Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_DOCUMENTS), "pdfdemo");
 
         if (!pdfFolder.exists()) {
@@ -892,15 +937,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-
         Document doc = new Document();
-        String mFilename = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(System.currentTimeMillis());
-        File myFile = new File(pdfFolder + mFilename + ".pdf");
+        mFilename = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(System.currentTimeMillis());
+//        String pdffile_path = pdfFolder + mFilename + ".pdf";
+        myFile = new File(pdfFolder + mFilename + ".pdf");
         OutputStream mFilePath = new FileOutputStream(myFile);
 
 
-
-        try{
+        try {
             PdfWriter writer = PdfWriter.getInstance(doc, mFilePath);
             Rectangle rect = new Rectangle(30, 30, 550, 800);
             writer.setBoxSize("art", rect);
@@ -924,7 +968,7 @@ public class MainActivity extends AppCompatActivity {
             image.scaleAbsolute(90, 90);
 
             Paragraph intro_image = new Paragraph();
-            intro_image.add(new Chunk("EDRI - Calculator\n", FontFactory.getFont(FontFactory.HELVETICA,30, Font.BOLD, BaseColor.BLACK)));
+            intro_image.add(new Chunk("EDRI - Calculator\n", FontFactory.getFont(FontFactory.HELVETICA, 30, Font.BOLD, BaseColor.BLACK)));
 
             doc.add(intro_image);
 
@@ -935,16 +979,15 @@ public class MainActivity extends AppCompatActivity {
 
             ArrayList l = new ArrayList();
 
-            for(int j = 0; j<col_data.size();j++){
+            for (int j = 0; j < col_data.size(); j++) {
                 l.add(col_data.get(j));
             }
             Set s = new HashSet(l);
             List<String> ll = new ArrayList<String>(s);
-            com.itextpdf.text.List ktf  = new com.itextpdf.text.List();
-            for(int i=0;i<ll.size();i++){
+            com.itextpdf.text.List ktf = new com.itextpdf.text.List();
+            for (int i = 0; i < ll.size(); i++) {
                 ktf.add(ll.get(i));
             }
-
 
 
             Phrase phrase = new Phrase();
@@ -1144,10 +1187,10 @@ public class MainActivity extends AppCompatActivity {
 
             Set economic_set = new HashSet(checkbox_data);
             List<String> economic_list = new ArrayList<String>(economic_set);
-            com.itextpdf.text.List economic_table_list_array  = new com.itextpdf.text.List();
-            for(int sts=0;sts<economic_list.size();sts++){
+            com.itextpdf.text.List economic_table_list_array = new com.itextpdf.text.List();
+            for (int sts = 0; sts < economic_list.size(); sts++) {
 //                    doc.add(new Paragraph("-> "+ll.get(i)));
-                economic_table_list_array.add(economic_list.get(sts)+"\n\n");
+                economic_table_list_array.add(economic_list.get(sts) + "\n\n");
             }
 
             Phrase eco_phrase = new Phrase();
@@ -1176,10 +1219,10 @@ public class MainActivity extends AppCompatActivity {
 
             Set life_set = new HashSet(life_checkbox_data);
             List<String> life_list = new ArrayList<String>(life_set);
-            com.itextpdf.text.List life_table_list_array  = new com.itextpdf.text.List();
-            for(int sts=0;sts<life_list.size();sts++){
+            com.itextpdf.text.List life_table_list_array = new com.itextpdf.text.List();
+            for (int sts = 0; sts < life_list.size(); sts++) {
 //                    doc.add(new Paragraph("-> "+ll.get(i)));
-                life_table_list_array.add(life_list.get(sts)+"\n\n");
+                life_table_list_array.add(life_list.get(sts) + "\n\n");
             }
 
             Phrase life_phrase = new Phrase();
@@ -1234,18 +1277,122 @@ public class MainActivity extends AppCompatActivity {
 
 
             doc.close();
-            Toast.makeText(this, mFilename +".pdf\nis saved to\n"+ mFilePath, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, mFilename + ".pdf\nis saved to\n" + mFilePath, Toast.LENGTH_SHORT).show();
+            view_file.setVisibility(View.VISIBLE);
+            view_file.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent viewPdf = new Intent(Intent.ACTION_VIEW);
+                    viewPdf.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    Uri URI = FileProvider.getUriForFile(MainActivity.this, MainActivity.this.getApplicationContext().getPackageName() + ".provider", myFile);
+                    viewPdf.setDataAndType(URI, "application/pdf");
+                    viewPdf.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    MainActivity.this.startActivity(viewPdf);
+//                    File new_myfile = new File(pdfFolder + mFilename + ".pdf");
+////                    File new_myfile = new File(mFilename);
+//                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.fromFile(new_myfile));
+//                    intent.setType("application/pdf");
+//
+//                    startActivity(intent);
+//                    if (Build.VERSION.SDK_INT < 24) {
+//
+////                        File pdfFolder = new File(Environment.getExternalStoragePublicDirectory(
+////                                Environment.DIRECTORY_DOCUMENTS), "");
+////
+////                        myFile = new File(pdfFolder + mFilename + ".pdf");
+//
+//
+////                        File file = new File(mFilename);
+//                        Intent target = new Intent(Intent.ACTION_VIEW);
+//                        target.setDataAndType(Uri.fromFile(myFile),"application/pdf");
+//
+//                        target.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+//
+//                        Intent intent = Intent.createChooser(target, "Open File");
+//                        try {
+//                            startActivity(intent);
+//                        } catch (ActivityNotFoundException e) {
+//                        }}else{
+//                        Intent target = new Intent(Intent.ACTION_VIEW);
+//                        target.setDataAndType(Uri.parse(myFile.getPath()),"application/pdf");
+//                        target.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+//
+//                        Intent intent = Intent.createChooser(target, "Open File");
+//                        try {
+//                            startActivity(intent);
+//                        } catch (ActivityNotFoundException e) {
+//
+//                        }}
+                    System.out.println("-----------------------------");
+                    System.out.println(myFile.toString());
+                    System.out.println(mFilename);
+                    System.out.println("-----------------------------");
 
+            }});
 
-        }catch (Exception e){
+        } catch (Exception e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
 
 
-
     }
 
-}
+
+//    private void previewPdf(View v,File file) {
+////        String filename = null;
+////        File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() +"/"+ filename);
+//        if (Build.VERSION.SDK_INT < 24) {
+//            Intent target = new Intent(Intent.ACTION_VIEW);
+//            target.setDataAndType(Uri.fromFile(file),"application/pdf");
+//            target.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+//
+//            Intent intent = Intent.createChooser(target, "Open File");
+//            try {
+//                startActivity(intent);
+//            } catch (ActivityNotFoundException e) {
+//        }}else{
+//            Intent target = new Intent(Intent.ACTION_VIEW);
+//            target.setDataAndType(Uri.parse(file.getPath()),"application/pdf");
+//            target.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+//
+//            Intent intent = Intent.createChooser(target, "Open File");
+//            try {
+//                startActivity(intent);
+//            } catch (ActivityNotFoundException e) {
+//
+//        }
+
+//            } else {
+//                p = Uri.parse(file.getPath()); // My work-around for SDKs up to 29.
+//            }
+//        Intent target = new Intent(Intent.ACTION_VIEW);
+//        target.setDataAndType(Uri.fromFile(file),"application/pdf");
+//        target.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+//
+//        Intent intent = Intent.createChooser(target, "Open File");
+//        try {
+//            startActivity(intent);
+//        } catch (ActivityNotFoundException e) {
+
+//        if (file.exists()) {
+//            Uri p;
+//            if (Build.VERSION.SDK_INT < 24) {
+//                p = Uri.fromFile(file);
+//            } else {
+//                p = Uri.parse(file.getPath()); // My work-around for SDKs up to 29.
+//            }
+//            Intent intent = new Intent(Intent.ACTION_VIEW);
+//            intent.setDataAndType(p, "application/pdf");
+//            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        try {
+//            startActivity(intent);
+//        }
+//        catch (ActivityNotFoundException e){
+//        }
+
+        }
+
+
 
 

@@ -213,6 +213,7 @@
             android:paddingTop="12dp"
             android:paddingBottom="12dp"
             android:hint="Enter Structure Storeys"
+            android:maxLines="1"
             />
 
 <!--        <EditText-->
@@ -250,6 +251,7 @@
             android:drawablePadding="20dp"
             android:paddingLeft="8dp"
             android:paddingRight="12dp"
+            android:maxLines="1"
             android:paddingTop="12dp"
             android:paddingBottom="12dp"
             android:hint="Enter Structure Height"/>
@@ -337,14 +339,24 @@
 
 
     <TextView
-        android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center"
+        android:gravity="center"
         android:text="Vulnerability"
         android:textColor="#000000"
         android:textSize="24sp"
         android:textStyle="bold"/>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="20dp"
+        android:paddingTop="0dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/checkbox_background">
 
     <TextView
         android:id="@+id/textView13"
@@ -353,8 +365,8 @@
         android:layout_marginTop="40dp"
         android:textColor="#000000"
         android:text="Economic Loss Inducing Factors"
-        android:layout_gravity="left"
-        android:gravity="left"
+        android:layout_gravity="center"
+        android:gravity="center"
         android:textSize="20sp"
         android:textStyle="bold"/>
 
@@ -1019,18 +1031,28 @@
         android:layout_height="wrap_content"
         android:text="Concrete ingredients measured by volume batching (-4)"
         />
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="20dp"
+        android:paddingTop="0dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/checkbox_background">
 
 
-    <TextView
+        <TextView
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="Life Threatening Factors"
         android:textColor="#000000"
-        android:textAlignment="textEnd"
         android:textSize="20sp"
         android:textStyle="bold"/>
 
@@ -1193,6 +1215,24 @@
         android:layout_marginTop="108dp"
         android:text="SUBMIT"
         android:layout_gravity="center" />
+
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        <Button
+            android:id="@+id/viewfile_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_marginTop="108dp"
+            android:backgroundTint="#FFEB3B"
+            android:drawableLeft="@drawable/ic_baseline_file_open_24"
+            android:text="Open File"
+            android:layout_gravity="center" />
+
+
 
 
     </androidx.appcompat.widget.LinearLayoutCompat>
