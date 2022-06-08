@@ -353,17 +353,17 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:theme="@style/ErrorStyle"
         android:paddingBottom="20dp"
         android:paddingTop="0dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/checkbox_background">
+        android:background="@drawable/corner_background">
 
     <TextView
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:textColor="#000000"
         android:text="Economic Loss Inducing Factors"
         android:layout_gravity="center"
         android:gravity="center"
@@ -391,7 +391,7 @@
         android:id="@+id/textViewLossSoil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="60dp"
         android:text="Soil and Foundation"
         android:textSize="16sp"
         android:textStyle="bold"/>
@@ -415,8 +415,7 @@
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
-        android:textColor="#000000"
+        android:layout_marginTop="60dp"
         android:text="Condition (-5%)"
         android:textAlignment="textEnd"
         android:textSize="18sp"
@@ -450,7 +449,7 @@
         android:id="@+id/textViewFound"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="60dp"
         android:text="Foundation"
         android:textSize="16sp"
         android:textStyle="bold"/>
@@ -495,7 +494,7 @@
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="60dp"
         android:text="Plan Shape"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -525,7 +524,7 @@
         android:id="@+id/textView16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="60dp"
         android:text="Elevation Profile"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -592,7 +591,7 @@
         android:id="@+id/textView17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="60dp"
         android:text="Door and window openings in walls"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -601,6 +600,7 @@
 
     <CheckBox
         android:id="@+id/door1"
+        android:layout_marginTop="6dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Rare single window close to corners  (-1)"
@@ -638,7 +638,7 @@
         android:id="@+id/textView19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="60dp"
         android:text="Distance from adjacent building"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -647,6 +647,7 @@
 
     <CheckBox
         android:id="@+id/distance1"
+        android:layout_marginTop="6dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Houses touch each other (-3)"
@@ -663,7 +664,7 @@
         android:id="@+id/textView20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="60dp"
         android:text="Parapets, objects on roof or projections"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -673,6 +674,7 @@
 
     <CheckBox
         android:id="@+id/parapets1"
+        android:layout_marginTop="8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Not secured to the structural system (-4)"
@@ -689,7 +691,7 @@
         android:id="@+id/textView22"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="60dp"
         android:text="Staircases"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -721,8 +723,7 @@
         android:id="@+id/textView23"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:textColor="#000000"
+        android:layout_marginTop="60dp"
         android:text="Structural Aspects (-20%)"
         android:textAlignment="textEnd"
         android:textSize="18sp"
@@ -741,6 +742,7 @@
 
     <CheckBox
         android:id="@+id/frame1"
+        android:layout_marginTop="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Grid of parallel planar frames only along one plan direction (-5)"
@@ -785,7 +787,7 @@
         android:id="@+id/textView25"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="60dp"
         android:text="Roof/Floor slab design"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -794,6 +796,7 @@
 
     <CheckBox
         android:id="@+id/roof1"
+        android:layout_marginTop="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Heavy roof/floor slab (-10)"
@@ -824,7 +827,7 @@
         android:id="@+id/textView26"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="60dp"
         android:text="Roof/floor – column connection"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -833,6 +836,7 @@
 
     <CheckBox
         android:id="@+id/roof_column1"
+        android:layout_marginTop="8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="No/insufficient anchorage of horizontal reinforcement from beams to columns at roof/floor levels (-10)"
@@ -842,7 +846,7 @@
         android:id="@+id/textView27"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="60dp"
         android:text="Member proportioning"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -851,6 +855,7 @@
 
     <CheckBox
         android:id="@+id/member1"
+        android:layout_marginTop="8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Column weaker (in moment capacity) than beams framing into it at each joint (-20)"
@@ -860,7 +865,7 @@
         android:id="@+id/textView28"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="60dp"
         android:text="Column and column – foundation connection"
         android:layout_gravity="left"
         android:gravity="left"
@@ -870,6 +875,7 @@
 
     <CheckBox
         android:id="@+id/column1"
+        android:layout_marginTop="8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="No/insufficient anchorage of reinforcement from columns to foundation (-5)"
@@ -886,7 +892,7 @@
         android:id="@+id/textView29"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="60dp"
         android:text="Staircase"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -918,7 +924,7 @@
         android:id="@+id/textView30"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="60dp"
         android:text="Large water tanks on roof"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -927,6 +933,7 @@
 
     <CheckBox
         android:id="@+id/tank1"
+        android:layout_marginTop="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Not anchored to the structural system (-4)"
@@ -936,8 +943,7 @@
         android:id="@+id/textView31"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:textColor="#000000"
+        android:layout_marginTop="60dp"
         android:text="Construction Details (-20%)"
         android:textAlignment="textEnd"
         android:textSize="18sp"
@@ -986,7 +992,7 @@
         android:id="@+id/textView33"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="60dp"
         android:text="Workmanship"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -1011,7 +1017,7 @@
         android:id="@+id/textView34"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="60dp"
         android:text="Concrete mix"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -1041,7 +1047,8 @@
         android:paddingBottom="20dp"
         android:paddingTop="0dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/checkbox_background">
+        android:theme="@style/ErrorStyle"
+        android:background="@drawable/corner_background">
 
 
         <TextView
@@ -1052,7 +1059,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="Life Threatening Factors"
-        android:textColor="#000000"
         android:textSize="20sp"
         android:textStyle="bold"/>
 
@@ -1060,7 +1066,7 @@
         android:id="@+id/textViewSite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="60dp"
         android:text="Siting Issues"
         android:textSize="16sp"
         android:textStyle="bold"/>
@@ -1093,7 +1099,7 @@
         android:id="@+id/textViewSoil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="60dp"
         android:text="Soil and Foundation Condition"
         android:textSize="16sp"
         android:textStyle="bold"/>
@@ -1119,7 +1125,7 @@
         android:id="@+id/textViewArch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="60dp"
         android:text="Architecture Features"
         android:textSize="16sp"
         android:textStyle="bold"/>
@@ -1144,7 +1150,7 @@
         android:id="@+id/textViewstruc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="60dp"
         android:text="Structural Aspects"
         android:textSize="16sp"
         android:textStyle="bold"/>
@@ -1177,7 +1183,7 @@
         android:id="@+id/textViewCons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="60dp"
         android:text="Construction Details"
         android:textSize="16sp"
         android:textStyle="bold"/>
