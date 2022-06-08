@@ -38,5 +38,19 @@
         <item name="android:dropDownListViewStyle">@style/MatchSpinnerStyle</item>
     </style>
 
+<!--    <style name="checkbox_style">-->
+<!--        <item name="buttonTint">@color/white</item>-->
+<!--        <item name="android:textColor">@color/white</item>-->
+<!--    </style>-->
+
+    <style name="ErrorStyle">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="fontFamily">@font/lato_bold</item>
+        <item name="colorAccent">@color/white</item>
+        <item name="buttonTint">@color/white</item>
+        <item name="android:textColorPrimaryDisableOnly">@color/white</item>
+<!--        <item name="android:checkboxStyle">@style/checkbox_style</item>-->
+    </style>
+
 
 </resources>

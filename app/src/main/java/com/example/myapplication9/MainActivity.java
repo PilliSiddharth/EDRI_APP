@@ -77,7 +77,9 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
 
     double z_val, soil_val, spectral_val, fsi_val, imp_val;
-    Integer stories_val;
+    Double stories_val;
+    Double hazard_val;
+    Double exposure_val;
 
     ArrayList<String> checkbox_data = new ArrayList<>();
     ArrayList<String> life_checkbox_data = new ArrayList<>();
@@ -809,15 +811,18 @@ public class MainActivity extends AppCompatActivity {
                         fsi_val = Double.parseDouble(fsi);
 
                         String stories = stories_text.getText().toString();
-                        stories_val = Integer.parseInt(stories);
+                        stories_val = Double.parseDouble(stories);
 
-                        spectral_val = Math.min((20 / stories_val), 2.5);
+//                        Double new_stories_val = stories_val;
+
+                        spectral_val = Math.min(20 / stories_val, 2.5);
 
                         Integer economic_loss_sum = lossSite1 + lossSoil1 + lossSoil2 + suit_soil1 + suit_soil2 + found1 + found2 + found3 + found4 + found5 + plan1 + plan2 + plan3 + elev1 + elev2 + elev3 + elev4 + elev5 + elev6 + elev7 + elev8 + door1 + door2 + door3 + door4 + door5 + distance1 + distance2 + parapets1 + parapets2 + staircases1 + staircases2 + staircases3 + frame1 + frame2 + frame3 + frame4 + frame5 + frame6 + roof1 + roof2 + roof3 + roof4 + roof_column1 + member1 + column1 + column2 + struc_staircase1 + struc_staircase2 + struc_staircase3 + tank1 + materials1 + materials2 + materials3 + materials4 + workmanship1 + workmanship2 + concrete1 + concrete2;
 
+
                         economic_loss = economic_loss_sum / 100.0;
-                        Double hazard_val = spectral_val * soil_val * z_val;
-                        Double exposure_val = imp_val * fsi_val;
+                        hazard_val = spectral_val * soil_val * z_val;
+                        exposure_val = imp_val * fsi_val;
 
 
                         risk_val = economic_loss * hazard_val * exposure_val;
@@ -863,6 +868,13 @@ public class MainActivity extends AppCompatActivity {
                     AlertDialog dialog = errbuilder.create();
                     dialog.show();
                 }
+
+                System.out.println(hazard_val);
+                System.out.println(spectral_val);
+                System.out.println(exposure_val);
+                System.out.println(economic_loss);
+
+
                 col_data.clear();
                 life_checkbox_data.clear();
                 checkbox_data.clear();
