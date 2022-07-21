@@ -216,6 +216,102 @@
             android:maxLines="1"
             />
 
+        <TextView
+            android:id="@+id/textView92"
+            android:layout_width="200dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/lato_bold"
+            android:textColor="#FFFFFF"
+            android:layout_marginLeft="20dp"
+            android:text="Left View of the Structure"
+            android:textAlignment="inherit"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/leftview_capture_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_marginLeft="16dp"
+            android:backgroundTint="#FFEB3B"
+            android:drawableLeft="@drawable/ic_baseline_camera_alt_24"
+            android:text="Capture Image"
+            />
+
+        <TextView
+            android:id="@+id/textView992"
+            android:layout_width="200dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/lato_bold"
+            android:textColor="#FFFFFF"
+            android:layout_marginLeft="20dp"
+            android:text="Right View of the Structure"
+            android:textAlignment="inherit"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/rightview_capture_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_marginLeft="16dp"
+            android:backgroundTint="#FFEB3B"
+            android:drawableLeft="@drawable/ic_baseline_camera_alt_24"
+            android:text="Capture Image"
+            />
+
+        <TextView
+            android:id="@+id/textView93"
+            android:layout_width="200dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/lato_bold"
+            android:textColor="#FFFFFF"
+            android:layout_marginLeft="20dp"
+            android:text="Front View of the Structure"
+            android:textAlignment="inherit"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/frontview_capture_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_marginLeft="16dp"
+            android:backgroundTint="#FFEB3B"
+            android:drawableLeft="@drawable/ic_baseline_camera_alt_24"
+            android:text="Capture Image"
+            />
+
+        <TextView
+            android:id="@+id/textView94"
+            android:layout_width="200dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/lato_bold"
+            android:textColor="#FFFFFF"
+            android:layout_marginLeft="20dp"
+            android:text="Rear View of the Structure"
+            android:textAlignment="inherit"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/rearview_capture_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_marginLeft="16dp"
+            android:backgroundTint="#FFEB3B"
+            android:drawableLeft="@drawable/ic_baseline_camera_alt_24"
+            android:text="Capture Image"
+            />
+
 <!--        <EditText-->
 <!--            android:id="@+id/editTextTextPersonName9"-->
 <!--            android:layout_width="252dp"-->
@@ -225,36 +321,7 @@
 <!--            android:hint="Enter the Stories..."-->
 <!--            android:inputType="textPersonName"/>-->
 
-        <TextView
-            android:id="@+id/textView18"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/lato_bold"
-            android:textColor="#FFFFFF"
-            android:layout_marginLeft="20dp"
-            android:layout_gravity="left"
-            android:gravity="left"
-            android:text="Spectral Shape"
-            android:textSize="16sp"
-            android:textStyle="bold"/>
 
-        <EditText
-            android:id="@+id/editTextTextPersonName4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/edittext_border"
-            android:drawableLeft="@drawable/ic_baseline_apartment_24"
-            android:drawablePadding="20dp"
-            android:paddingLeft="8dp"
-            android:paddingRight="12dp"
-            android:maxLines="1"
-            android:paddingTop="12dp"
-            android:paddingBottom="12dp"
-            android:hint="Enter Structure Height"/>
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -334,6 +401,35 @@
             android:paddingTop="12dp"
             android:paddingBottom="12dp"
             android:hint="Enter FSI of Building"/>
+
+        <TextView
+            android:id="@+id/textView12837"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/lato_bold"
+            android:textColor="#FFFFFF"
+            android:layout_marginLeft="20dp"
+            android:text="FSI (Floor Space Index)  Allowable"
+            android:textAlignment="textEnd"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/fsi_allowable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/edittext_border"
+            android:drawableLeft="@drawable/ic_baseline_apartment_24"
+            android:drawablePadding="20dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="12dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:hint="Enter FSI of Building"/>
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 
@@ -388,35 +484,11 @@
         />
 
     <TextView
-        android:id="@+id/textViewLossSoil"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:text="Soil and Foundation"
-        android:textSize="16sp"
-        android:textStyle="bold"/>
-
-    <CheckBox
-        android:id="@+id/lossSoil1"
-        android:layout_marginTop="5dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Soft Soil"
-        />
-
-    <CheckBox
-        android:id="@+id/lossSoil2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Weak Soil"
-        />
-
-    <TextView
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
-        android:text="Condition (-5%)"
+        android:text="Soil and Foundation Condition (-5%)"
         android:textAlignment="textEnd"
         android:textSize="18sp"
         android:textStyle="bold"/>
@@ -425,7 +497,7 @@
         android:id="@+id/textViewSusSoil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         android:text="Suitability of Soil Type"
         android:textSize="16sp"
         android:textStyle="bold"/>
@@ -443,6 +515,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Soil with moisture (-2)"
+        />
+
+    <CheckBox
+        android:id="@+id/lossSoil1"
+        android:layout_marginTop="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Soft Soil"
+        />
+
+    <CheckBox
+        android:id="@+id/lossSoil2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Weak Soil"
         />
 
     <TextView
@@ -491,10 +578,20 @@
         />
 
     <TextView
-        android:id="@+id/textView15"
+        android:id="@+id/textView123"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
+        android:text="Architectural Features (-50%)"
+        android:textAlignment="textEnd"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="Plan Shape"
         android:textSize="16sp"
         android:textStyle="bold"
