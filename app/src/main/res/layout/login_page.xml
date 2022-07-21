@@ -66,6 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:drawableLeft="@drawable/ic_baseline_person_24"
             android:inputType="textPersonName"
             android:layout_marginTop="5dp"
             android:background="@drawable/edittext_border"
@@ -89,23 +90,38 @@
             android:textSize="16sp"
             android:textStyle="bold" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
         <EditText
             android:id="@+id/login_pass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:drawableLeft="@drawable/ic_baseline_lock_24"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:inputType="date"
+            android:inputType="text"
             android:background="@drawable/edittext_border"
             android:drawablePadding="20dp"
             android:paddingLeft="8dp"
             android:paddingRight="12dp"
             android:paddingTop="12dp"
             android:paddingBottom="12dp"
-            android:hint="Enter Password"
+            android:hint="Enter Password"/>
+
+        <ImageButton
+            android:id="@+id/pastePin"
+            android:layout_marginLeft="-60dp"
+            android:layout_marginTop="5dp"
+            style="?android:buttonBarButtonStyle"
+            android:src="@drawable/ic_baseline_remove_red_eye_24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
             />
+        </LinearLayout>
 
            </androidx.appcompat.widget.LinearLayoutCompat>
 
