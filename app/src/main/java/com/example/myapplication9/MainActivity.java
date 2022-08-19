@@ -78,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
     Double allowable_fsi_value;
 
     ArrayList<String> checkbox_data = new ArrayList<>();
+//    ArrayList<String>
+
     ArrayList<String> life_checkbox_data = new ArrayList<>();
     double risk_val;
     String risk_percentage;
@@ -921,7 +923,7 @@ public class MainActivity extends AppCompatActivity {
                         fsi_val = Double.parseDouble(fsi);
 
 
-                        allowable_fsi_text.setText("1");
+//                        allowable_fsi_text.setText("1");
                         String fsi_allowable_text = allowable_fsi_text.getText().toString();
                         allowable_fsi_value = Double.parseDouble(fsi_allowable_text);
 
@@ -932,18 +934,57 @@ public class MainActivity extends AppCompatActivity {
 
                         spectral_val = Math.min(20 / stories_val, 2.5);
 
-                        Integer economic_loss_sum = lossSite1 + lossSoil1 + lossSoil2 + suit_soil1 + suit_soil2 + found1 + found2 + found3 + found4 + found5 + plan1 + plan2 + plan3 + elev1 + elev2 + elev3 + elev4 + elev5 + elev6 + elev7 + elev8 + door1 + door2 + door3 + door4 + door5 + distance1 + distance2 + parapets1 + parapets2 + staircases1 + staircases2 + staircases3 + frame1 + frame2 + frame3 + frame4 + frame5 + frame6 + roof1 + roof2 + roof3 + roof4 + roof_column1 + member1 + column1 + column2 + struc_staircase1 + struc_staircase2 + struc_staircase3 + tank1 + materials1 + materials2 + materials3 + materials4 + workmanship1 + workmanship2 + concrete1 + concrete2;
+//                        Integer economic_loss_sum = lossSite1 + lossSoil1 + lossSoil2 + suit_soil1 + suit_soil2 + found1 + found2 + found3 + found4 + found5 + plan1 + plan2 + plan3 + elev1 + elev2 + elev3 + elev4 + elev5 + elev6 + elev7 + elev8 + door1 + door2 + door3 + door4 + door5 + distance1 + distance2 + parapets1 + parapets2 + staircases1 + staircases2 + staircases3 + frame1 + frame2 + frame3 + frame4 + frame5 + frame6 + roof1 + roof2 + roof3 + roof4 + roof_column1 + member1 + column1 + column2 + struc_staircase1 + struc_staircase2 + struc_staircase3 + tank1 + materials1 + materials2 + materials3 + materials4 + workmanship1 + workmanship2 + concrete1 + concrete2;
 
+                        Integer siting_issues = lossSite1 + lossSoil1 + lossSoil2;
+                        Integer condition = suit_soil1 + suit_soil2 + found1 + found2 + found3 + found4 + found5;
+                        Integer arch_features =  plan1 + plan2 + plan3 + elev1 + elev2 + elev3 + elev4 + elev5 + elev6 + elev7 + elev8 + door1 + door2 + door3 + door4 + door5 + distance1 + distance2 + parapets1 + parapets2 + staircases1 + staircases2 + staircases3;
+                        Integer struc_aspects = frame1 + frame2 + frame3 + frame4 + frame5 + frame6 + roof1 + roof2 + roof3 + roof4 + roof_column1 + member1 + column1 + column2 + struc_staircase1 + struc_staircase2 + struc_staircase3 + tank1;
+                        Integer cons_details = materials1 + materials2 + materials3 + materials4 + workmanship1 + workmanship2 + concrete1 + concrete2;
 
+                        siting_issues = Math.min(siting_issues, 5);
+                        condition = Math.min(condition, 5);
+                        arch_features = Math.min(arch_features, 50);
+                        struc_aspects = Math.min(struc_aspects, 20);
+                        cons_details = Math.min(cons_details, 20);
+//                        economic_loss = economic_loss_sum / 100.0;
+//                        hazard_val = spectral_val * soil_val * z_val;
+//                        Double allowable_hazad_val = hazard_val;
+////                        hazard_val = hazard_val/allowable_hazad_val;
+////                        hazard_val = hazard_val/1;
+//
+//                        complete_fsi_val = fsi_val/allowable_fsi_value;
+//
+//                        Double imp_val_allowable = imp_val;
+//
+//
+//                        exposure_val = imp_val * complete_fsi_val;
+//                        Double exposure_val_allowbale = imp_val * complete_fsi_val;
+//
+//                        Integer economic_allowable = 1;
+//
+//                        Double risk_actual = economic_loss * hazard_val * exposure_val;
+//                        Double risk_allowable = economic_allowable * allowable_hazad_val * exposure_val_allowbale;
+//
+//                        risk_val = risk_actual/risk_allowable;
+                        Integer economic_loss_sum = siting_issues + condition + arch_features + struc_aspects + cons_details;
                         economic_loss = economic_loss_sum / 100.0;
                         hazard_val = spectral_val * soil_val * z_val;
+                        Double allowable_hazard_value = hazard_val;
 
-                        complete_fsi_val = fsi_val/allowable_fsi_value;
+//                        complete_fsi_val = fsi_val/allowable_fsi_value;
 
-                        exposure_val = imp_val * complete_fsi_val;
+                        exposure_val = imp_val * fsi_val;
+                        Double exposure_val_allowable = imp_val * allowable_fsi_value;
+
+                        Integer economic_allowable = 1;
 
 
-                        risk_val = economic_loss * hazard_val * exposure_val;
+                        Double risk_actual = economic_loss * hazard_val * exposure_val;
+                        Double risk_allowable = economic_allowable * allowable_hazard_value * exposure_val_allowable;
+
+                        risk_val = risk_actual/risk_allowable;
+
                         if (!life_checkbox_data.isEmpty() || !col_data.isEmpty()) {
                             risk_percentage = "100%";
                         }
@@ -988,10 +1029,11 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                System.out.println(hazard_val);
-                System.out.println(spectral_val);
-                System.out.println(exposure_val);
-                System.out.println(economic_loss);
+                System.out.println("hazard value: "+hazard_val);
+                System.out.println("spectral value: "+spectral_val);
+                System.out.println("exposure value: "+exposure_val);
+                System.out.println("Economic Loss: "+economic_loss);
+                System.out.println("Risk Value(Normalized)"+ risk_val);
 
                 System.out.println(allowable_fsi_value);
                 System.out.println(fsi_val);
